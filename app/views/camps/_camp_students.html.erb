@@ -11,12 +11,12 @@
       </thead>
 
       <tbody>
-         @camp.registrations.each do |r| 
+         <% @registrations.each do |r| %>
           <tr>
-            <td>r.student.proper_name</td>
-            <td>r.points_earned</td>
+            <td><%= r.student.proper_name %></td>
+            <td><%= r.points_earned %></td>
           </tr>
-        end
+        <% end %>
       </tbody>
     </table>
     </div>

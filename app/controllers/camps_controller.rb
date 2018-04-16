@@ -1,4 +1,6 @@
 class CampsController < ApplicationController
+  authorize_resource  
+
   before_action :set_camp, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -8,6 +10,7 @@ class CampsController < ApplicationController
 
   def show
     @instructors = @camp.instructors.alphabetical
+    @registrations = @camp.registrations.alphabetical
   end
 
   def edit

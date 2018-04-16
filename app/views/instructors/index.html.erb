@@ -21,7 +21,9 @@
         <td><%= link_to instructor.name, instructor %></td>
         <td><%= number_to_phone instructor.phone %></td>
         <td><%= instructor.camps.size %></td>
-        <td><%= link_to 'Edit', edit_instructor_path(instructor), :class=>"btn waves-effect waves-light blue" %></td>
+        <% if can? :update, Instructor %>
+          <td><%= link_to 'Edit', edit_instructor_path(instructor), :class=>"btn waves-effect waves-light blue" %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -33,5 +35,7 @@
 
     <% end %>
 
-<%= link_to 'New instructor', new_instructor_path %>
+<% if can? :create, Instructor %>
+  <td><%= link_to 'New instructor', new_instructor_path, :class=>"btn waves-effect waves-light blue" %></td>
+<% end %>
 

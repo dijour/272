@@ -13,6 +13,16 @@ Rails.application.routes.draw do
   resources :instructors
   resources :locations
   resources :curriculums
+  resources :users
+  resources :registrations
+  resources :families
+  resources :sessions
+  resources :students
+  get 'user/edit' => 'users#edit', :as => :edit_current_user
+  get 'signup' => 'users#new', :as => :signup
+  get 'login' => 'sessions#new', :as => :login
+  get 'logout' => 'sessions#destroy', :as => :logout
+
 
   # Routes for managing camp instructors
   get 'camp_instructors/new', to: 'camp_instructors#new', as: :new_camp_instructor

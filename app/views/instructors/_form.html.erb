@@ -5,9 +5,7 @@
       <%= f.input :first_name, label_html: { class: 'active' } %>
       <%= f.input :last_name, label_html: { class: 'active' } %>
       <%= f.input :bio, label_html: { class: 'active' } %>
-      <%# f.input :email, label_html: { class: 'active' } %>
-      <%# f.input :phone, label_html: { class: 'active' } %>
-      <%= f.input :user_id, label_html: { class: 'active' } %>
+      <%= f.input :user_id, collection: User.all, include_blank: true %>
       <%= f.input :active %>
     </div>
   </div>

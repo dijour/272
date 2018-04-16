@@ -1,4 +1,6 @@
 class CurriculumsController < ApplicationController
+  authorize_resource  
+
   before_action :set_curriculum, only: [:show, :edit, :update, :destroy]
 
   def index

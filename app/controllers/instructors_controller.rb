@@ -1,4 +1,7 @@
 class InstructorsController < ApplicationController
+  authorize_resource  
+
+
   before_action :set_instructor, only: [:show, :edit, :update, :destroy]
 
   def index

@@ -1,0 +1,20 @@
+<div class="card indigo lighten-2">
+  <div class="card-content white-text">
+    <span class="card-title">Camp Registrations</span>
+	  <% if @registrations.empty? %>
+		<p>No students registered at this time</p>
+	  <% else %>
+      <ul>
+        <% @registrations.each do |r| %>
+          <li><%= r.student.proper_name %></li>
+          <li><%= r.student.points_earned %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <div class="card-action">
+    <% if can? :create, Registration %>
+      <%= link_to "Add a new registration", new_registration_path(camp_id: @camp.id) %>
+    <% end %>
+    </div>
+  </div>
+</div>

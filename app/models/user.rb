@@ -18,11 +18,26 @@ class User < ApplicationRecord
   # for use in authorizing with CanCan
   ROLES = [['Admin', :admin],['Instructor', :instructor],['Parent', :parent]]
 
+  def self.authenticate(email,password)
+    find_by_email(email).try(:authenticate, password)
+  end
+
   def role?(authorized_role)
     return false if role.nil?
-    role.downcase.to_sym == authorized_role
+    role.to_sym == authorized_role
   end
     
+  def name
+    if Instructor.where(user: self).size == 1
+      return Instructor.where(user: self).first.proper_name
+    elseif Family.where(user: self).size == 1
+      fam = Family.where(user: self).first
+      return "#{fam.parents_first_name}, #{fam.name}"
+    else
+      return
+    end
+  end
+
   private
   def reformat_phone
     self.phone = self.phone.to_s.gsub(/[^0-9]/,"")

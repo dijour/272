@@ -12,8 +12,17 @@
   </head>
 
   <body>
-
-    <%= render :partial => "partials/nav" %>
+    
+    
+    <!-- Partials for the topbar and navigation -->
+    <%#= render :partial => "partials/topbar" %>
+    <% if logged_in? && ( current_user.role?(:admin) || current_user.role?(:instructor) ) %>
+      <%= render :partial => "partials/nav_admin" %>
+    <% elsif logged_in? && current_user.role?(:parent) %>
+      <%= render :partial => "partials/nav_parent" %>
+    <% else %>
+      <%= render :partial => "partials/nav_guest" %>
+    <% end %>
     
     <div class="row">
       <div class="container" id="main_content">
@@ -28,5 +37,9 @@
       </div>
     </footer> 
     <%= javascript_include_tag "application" %>
+      
+      </div>
+    </div>
+  
   </body>
 </html>

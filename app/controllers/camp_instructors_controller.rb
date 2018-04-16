@@ -1,5 +1,8 @@
 class CampInstructorsController < ApplicationController
   
+  authorize_resource  
+
+  
   def new
     @camp_instructor   = CampInstructor.new
     @camp              = Camp.find(params[:camp_id])
