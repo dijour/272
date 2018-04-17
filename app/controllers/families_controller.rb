@@ -9,6 +9,7 @@ class FamiliesController < ApplicationController
   end
 
   def show
+    authorize! :show, @family
     @students = @family.students.alphabetical
   end
 

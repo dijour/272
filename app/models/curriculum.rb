@@ -16,6 +16,7 @@ class Curriculum < ApplicationRecord
   # scopes
   scope :alphabetical, -> { order('name') }
   scope :for_rating, ->(rating) { where("min_rating <= ? and max_rating >= ?", rating, rating) }
+  scope :current, -> { joins(:camps).where("start_date <= ? and end_date >= ?", Date.today, Date.today) }
 
   # callbacks
   before_destroy do 

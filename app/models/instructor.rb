@@ -13,6 +13,7 @@ class Instructor < ApplicationRecord
   # scopes
   scope :alphabetical, -> { order('last_name, first_name') }
   scope :needs_bio, -> { where(bio: nil) }
+  scope :current, -> { joins(:camps).where("start_date <= ? and end_date >= ?", Date.today, Date.today) }
 
   # class methods
   def self.for_camp(camp)

@@ -1,6 +1,11 @@
 class User < ApplicationRecord
   # use has_secure_password for password hashing
   has_secure_password
+  
+  # relationships
+  has_one :family
+  has_one :instructor
+  
 
   # validations
   validates :username, presence: true, uniqueness: { case_sensitive: false}

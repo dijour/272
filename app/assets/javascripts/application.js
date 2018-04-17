@@ -18,7 +18,13 @@
 //= require chartkick
 //= require_tree .
 
+  $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+        
+
 // $( document ).ready(function () {
+//     $('.sidenav').sidenav();
 //     $('select').material_select();
 //     $('.datepicker').pickadate({
 //     format: 'mmmm dd, yyyy',
@@ -31,3 +37,4 @@
 //     closeOnSelect: false // Close upon selecting a date,
 //   });
 // });
+        

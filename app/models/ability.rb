@@ -1,4 +1,5 @@
 require 'set'
+require 'byebug'
 
 class Ability
   include CanCan::Ability
@@ -41,7 +42,7 @@ class Ability
         user.id == uzer.id
       end
       can :update, Instructor do |instructor|  
-        instructor.id == user.instructor_id
+        instructor.id == user.instructor.id
       end
       can :read, Student do |student|  
         #can read students who are enrolled in camps they teach (past or upcoming)
@@ -57,23 +58,24 @@ class Ability
       end
       
     elsif user.role? :parent
-      can :update, Family do |family|  
-        family.id == user.family_id
-      end
-      can :read, Family do |family|
-        family.id == user.family_id
+      can :show, Student do |student|
+        user.family.students.include? student
       end
       can :update, Student do |student|
-        user.family.students.include? student.id
+        user.family.students.include? student
+      end
+      can :update, Family do |family|  
+        family.id == user.family.id
+      end
+      can :show, Family do |family|
+        family.id == user.family.id
       end
       can :read, Curriculum
       can :read, Camp
       can :create, Registration do |registration|
         user.family.students.include? registration.student
       end
-      can :read, Student do |student|
-        user.family.students.include? student.id
-      end
+
       
     elsif user.role.nil?
       can :create, User do |uzer|

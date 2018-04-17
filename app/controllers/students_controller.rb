@@ -9,6 +9,7 @@ class StudentsController < ApplicationController
   end
 
   def show
+    authorize! :show, @student
     @all_registrations = @student.registrations
     @upcoming_camps = []
     @past_camps = []
