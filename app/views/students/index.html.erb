@@ -22,7 +22,7 @@
         <td><%= student.rating %></td>
         <td><%= student.registrations.size %></td>
         <% if can? :update, Student %>
-          <td><%= link_to 'Edit', edit_student_path(student), :class=>"btn waves-effect waves-light blue" %></td>
+          <td><%= link_to 'Edit', edit_student_path(student), :class=>"btn waves-effect waves-light gradient-45deg-red-pink mt-2 btn-small z-depth-5" %></td>
         <% end %>
       </tr>
     <% end %>

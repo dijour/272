@@ -1,4 +1,4 @@
-<div class="col s12 m6">
+<div>
   <div class="card indigo lighten-2">
     <div class="card-content white-text">
       <span class="card-title">Registered Students</span>
@@ -6,6 +6,7 @@
       <thead>
         <tr>
           <th>Name</th>
+          <th>Rating</th>
           <th>Points Earned</th>
         </tr>
       </thead>
@@ -14,11 +15,16 @@
          <% @registrations.each do |r| %>
           <tr>
             <td><%= r.student.proper_name %></td>
+            <td><%= r.student.rating %></td>
             <td><%= r.points_earned %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
+    <% if can? :create, Registration %>
+      <div class="card-action" style="red">
+        <%= link_to "Add a new student", new_registration_path(camp_id: @camp.id) %>
+    <% end %>
     </div>
   </div>
 </div>

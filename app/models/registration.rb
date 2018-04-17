@@ -6,11 +6,16 @@ class Registration < ApplicationRecord
   attr_accessor :credit_card_number
   attr_accessor :expiration_year
   attr_accessor :expiration_month
-
+  attr_accessor :points_earned
+  
+  
   # relationships
   belongs_to :camp
   belongs_to :student
   has_one :family, through: :student
+  
+  # callbacks
+  before_update :set_points
 
   # validations
   validates :camp_id, presence: true, numericality: { greater_than: 0, only_integer: true }
@@ -37,7 +42,6 @@ class Registration < ApplicationRecord
   def credit_card_type
     credit_card.type.nil? ? "N/A" : credit_card.type.name
   end
-
 
   private
   def student_rating_appropriate_for_camp
@@ -88,4 +92,9 @@ class Registration < ApplicationRecord
     end
     true
   end
+  
+  def set_points
+    self.points_earned = 0
+  end
+  
 end

@@ -1,19 +1,9 @@
-<% if can? :manage, :all %>
-    <%= render :partial => "admin_home" %>
+<% if logged_in? && current_user.role?(:admin) %>
+  <%= render :partial => "admin_home" %>
+<% elsif logged_in? && current_user.role?(:instructor) %>
+  <%= render :partial => "instructor_home" %>
+<% elsif logged_in? && current_user.role?(:parent) %>
+  <%= render :partial => "family_home" %>
+<% else %>
+  <%= render :partial => "guest_home" %>
 <% end %>
-
-<%# else %>
-    <%# if can? :destroy, Instructor %>
-        <%#= render :partial => "instructor_home" %>
-    <%# end %>
-<%# end %>
-
-<%# else %>
-    <%#if can? :create, Student %>
-        <%#= render :partial => "instructor_home" %>
-    <%# end %>
-<%# end %>
-
-<%# else %>
-    <%#= render :partial => "guest_home" %>
-<%# end %>

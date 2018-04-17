@@ -4,10 +4,10 @@
   </div>
   <div class="col s5">
     <%= render :partial => "camp_instructors"%>
-    <%# render :partial => "camp_students"%>
-    <% if can? :create, Registration %>
-      <%= render :partial => "camp_registrations"%>
-    <% end %>
+    <%= render :partial => "camp_students"%>
+    <%# if can? :create, Registration %>
+      <%#= render :partial => "camp_registrations"%>
+    <%# end %>
   </div>
 </div>
 <div class="row">

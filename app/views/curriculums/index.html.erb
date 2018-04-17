@@ -22,7 +22,7 @@
         <td><%= curriculum.min_rating == 0 ? "Unrated" : curriculum.min_rating %> - <%= curriculum.max_rating %></td>
         <td><%= Camp.for_curriculum(curriculum.id).size %></td>
         <% if can? :update, Curriculum %>
-          <td><%= link_to 'Edit', edit_curriculum_path(curriculum), :class=>"btn waves-effect waves-light blue" %></td>
+          <td><%= link_to 'Edit', edit_curriculum_path(curriculum), :class=>"btn waves-effect waves-light gradient-45deg-red-pink mt-2 btn-small z-depth-5" %></td>
         <% end %>
       </tr>
     <% end %>

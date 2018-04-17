@@ -5,7 +5,7 @@
       <%= f.error_notification %>
       <div class="row">
         <div class="form-inputs">
-          <%= f.input :student_id, collection: Student.active.alphabetical.below_rating(@registration.camp.curriculum.max_rating).at_or_above_rating(@registration.camp.curriculum.max_rating).to_a, include_blank: true %>
+          <%= f.input :student_id, collection: Student.active.alphabetical.below_rating(@camp.curriculum.max_rating).at_or_above_rating(@camp.curriculum.min_rating).to_a, include_blank: true %>
           <%= f.input :camp_id, as: :hidden, input_html: { value: @camp.id } %>
         </div>
       </div>

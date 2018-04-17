@@ -7,12 +7,14 @@
       <table>
         <thead>
           <th>Student</th>
+          <th>Rating</th>
           <th>Registered Camps</th>
           <th>Next Camp</th>
         </thead>
           <% for student in @students %>
             <tr>
               <td><%= link_to student.proper_name, student_path(student) %></td>
+              <td><%= student.rating %></td>
               <td><%= link_to student.registrations.size, student_path(student) %></td>
               <td>&nbsp;<%= link_to student.camps.upcoming.first.start_date.strftime("%m/%d/%y"), camp_path(student.camps.upcoming.first) %></td>
             </tr>

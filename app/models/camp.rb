@@ -30,11 +30,11 @@ class Camp < ApplicationRecord
   scope :morning, -> { where('time_slot = ?','am') }
   scope :afternoon, -> { where('time_slot = ?','pm') }
   scope :upcoming, -> { where('start_date >= ?', Date.today) }
+  scope :current, -> { where("start_date <= ? and end_date >= ?", Date.today, Date.today) }
   scope :past, -> { where('end_date < ?', Date.today) }
   scope :for_curriculum, ->(curriculum_id) { where("curriculum_id = ?", curriculum_id) }
   scope :full, -> { joins(:registrations).group(:camp_id).having('count(*) = max_students') }
   scope :empty, -> { joins("left join registrations on camps.id=registrations.camp_id").where("registrations.student_id is null") }
-
 
   # instance methods
   def name
