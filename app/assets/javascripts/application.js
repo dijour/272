@@ -18,10 +18,9 @@
 //= require chartkick
 //= require_tree .
 
-  $(document).ready(function(){
-    $('.sidenav').sidenav();
-  });
-        
+$( document ).ready(function(){
+  $(".button-collapse").sideNav();
+});
 
 // $( document ).ready(function () {
 //     $('.sidenav').sidenav();
