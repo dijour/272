@@ -1,0 +1,37 @@
+<p class="supertiny">&nbsp;</p>
+<footer class="page-footer" style="background: -webkit-linear-gradient(45deg, #FF5252 0%, #6212e2 100%)">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 align="left" class="white-text">A&M Chess Camps</h5>
+        <p align="left" class="grey-text text-lighten-4">A team of college students working on this project like it's our full time job. Do it for the kids, man!</p>
+
+
+      </div>
+      <div class="col l3 s12">
+        <h5 align="left" class="white-text">A&M</h5>
+        <ul align="left">
+          <%= link_to 'Home', home_path %></br>
+          <%= link_to 'About Us', about_path %></br>
+          <%= link_to 'Contact Us', contact_path %></br>
+          <%= link_to 'Privacy Policy', privacy_path %>
+        </ul>
+      </div>
+      <div class="col l3 s12">
+        <h5 align="left" class="white-text">Info</h5>
+        <ul align="left">
+          <%= link_to 'Curriculums', curriculums_path %></br>
+          <%= link_to 'Camps', camps_path %></br>
+          <%= link_to 'Locations', locations_path %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer copy-right">
+    <div align="center" id="copy">
+      Webmaster: <%= mail_to("dijour@cmu.edu", "Dean Dijour", encode: "javascript") %> 
+      &nbsp;&nbsp;&copy 2018
+    </div>
+  </div>
+  
+</footer>
