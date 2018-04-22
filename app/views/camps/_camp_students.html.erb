@@ -1,4 +1,4 @@
-<div>
+<div class="col s12">
   <div class="card indigo lighten-2">
     <div class="card-content white-text">
       <span class="card-title">Registered Students</span>
@@ -14,7 +14,11 @@
       <tbody>
          <% @registrations.each do |r| %>
           <tr>
+            <% if can? :read, r.student %>
+                <td><%= link_to r.student.proper_name, student_path(r.student) %></td>
+            <% else %>
             <td><%= r.student.proper_name %></td>
+            <% end %>
             <td><%= r.student.rating %></td>
             <td><%= r.points_earned %></td>
           </tr>
@@ -27,4 +31,5 @@
     <% end %>
     </div>
   </div>
+</div>
 </div>

@@ -5,6 +5,7 @@ class FamiliesController < ApplicationController
   before_action :set_family, only: [:show, :edit, :update, :destroy]
 
   def index
+    authorize! :index, @families
     @families = Family.all.alphabetical.paginate(:page => params[:page]).per_page(12)
   end
 

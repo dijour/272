@@ -120,7 +120,7 @@
         <% for camp in Camp.all do %>
             <% if camp.start_date <= Date.today && camp.end_date >= Date.today %>
               <tr>
-                <td style="Black"><%= link_to camp.name, camp %></td>
+                <td ><%= link_to camp.name, camp, {:style=>'color:blue;'}%></td>
                 <td><%= camp.max_students %></td>
                 <td><%= camp.registrations.size %></td>
               </tr>

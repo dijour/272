@@ -5,6 +5,7 @@ class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
 
   def index
+    authorize! :index, @students
     @students = Student.all.alphabetical.paginate(:page => params[:page]).per_page(12)
   end
 

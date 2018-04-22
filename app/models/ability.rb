@@ -38,24 +38,57 @@ class Ability
       can :manage, :all
     
     elsif user.role? :instructor
+      can :read, Curriculum
+      
+      can :read, Camp
+      
+      can :read, Location
+      
+      can :update, Instructor do |instr|
+        user.instructor.id == instr.id
+      end
+      
+      can :show, Instructor do |instr|
+        instr.id = user.instructor.id
+      end
+      
+      can :index, Instructor do |instr|
+        instructlist = Set.new
+        for camp in user.instructor.camps
+          for struct in camp.instructors
+            instructlist << struct
+          end
+        end
+        instructlist.include? instr.id
+      end
+      
       can :update, User do |uzer|  
         user.id == uzer.id
       end
-      can :update, Instructor do |instructor|  
-        instructor.id == user.instructor.id
-      end
+      
       can :read, Student do |student|  
+
         #can read students who are enrolled in camps they teach (past or upcoming)
-        user.instructor.camps.registrations.include? student.id
+        studs = Set.new
+        user.instructor.camps.each do |camp|
+          for student in camp.students
+            studs << student
+          end
+        end
+        studs.map {|s| s.id}.include? student.id
       end
       can :read, Family do |family|
         # can read families whose students are enrolled in camps the instructor teaches
         fams = Set.new
-        user.instructor.camps.registrations.each do |reg|
-          set << reg.student.family
+        user.instructor.camps.each do |camp|
+          blah = camp.students.map {|s| s.family}
+           for b in blah
+             fams << b
+           end
         end
         fams.include? family.id
       end
+
       
     elsif user.role? :parent
       can :show, Student do |student|

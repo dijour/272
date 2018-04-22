@@ -5,5 +5,5 @@
 <% elsif logged_in? && current_user.role?(:parent) %>
   <%= render :partial => "family_home" %>
 <% else %>
-  <%= render :partial => "guest_home" %>
+  <%= render :partial => "test_home" %>
 <% end %>
