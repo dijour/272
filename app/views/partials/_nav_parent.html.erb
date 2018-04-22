@@ -1,16 +1,24 @@
-<nav>
-  <div class="nav-wrapper" style="background: -webkit-linear-gradient(45deg, #FF5252 0%, #6212e2 100%)">
-    &nbsp&nbsp
-    <a href="/" class="brand-logo">A&M Chess Camp</a>
-    <ul class="right">
-      <li><%= link_to 'My Family', family_path(current_user.family.id) %></li>
-      <li><%= link_to "Curriculums", curriculums_path %></li>
-      <li><%= link_to "Camps", camps_path %></li> 
-      <li><%= link_to "Instructors", instructors_path %></li>
-      <li><%= link_to "Locations", locations_path %></li>
-      <ul class="right">
-        <li><%= link_to 'Logout', logout_path %></li>
-      </ul>
-    </ul>
-  </div>
+<nav class="nav">
+    <div class="nav-wrapper" style="background: -webkit-linear-gradient(45deg, #FF5252 0%, #6212e2 100%)">
+        <a href="#" class="brand-logo left">A&M Chess Camp</a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse right"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><%= link_to 'My Family', family_path(current_user.family.id) %></li>
+          <li><%= link_to "Curriculums", curriculums_path %></li>
+          <li><%= link_to "Camps", camps_path %></li> 
+          <li><%= link_to "Instructors", instructors_path %></li>
+          <li><%= link_to "Locations", locations_path %></li>
+        <ul class="right">
+          <li><%= link_to 'Logout', logout_path %></li>
+        </ul>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+          <li><%= link_to 'My Family', family_path(current_user.family.id) %></li>
+          <li><%= link_to "Curriculums", curriculums_path %></li>
+          <li><%= link_to "Camps", camps_path %></li> 
+          <li><%= link_to "Instructors", instructors_path %></li>
+          <li><%= link_to "Locations", locations_path %></li>
+          <li><%= link_to 'Logout', logout_path %></li>
+        </ul>
+    </div>
 </nav>

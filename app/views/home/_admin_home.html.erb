@@ -1,16 +1,15 @@
 <section class="hero is-info welcome is-small">
     <div class="container-large">
       <h1 class="title center">
-        Hello, Admin.
+        <%= "Hello, #{current_user.username}" %>
       </h1>
     </div>
 </section>
 
-<div class="col s12 m7">
+
 <h2 class="header center">Your Week</h2>
-
-
-  <div class="col s10">
+<div class="row">
+  <div class="col s6">
     <div class="card blue darken-1">
       <div class="card-content white-text">
         <span class="card-title">Camps</span>
@@ -43,7 +42,7 @@
       </div>
     </div>
   </div>
-  <div class="col s4">
+  <div class="col s6">
     <div class="card blue-grey darken-1">
       <div class="card-content white-text">
         <span class="card-title">Instructor's Camps</span>
@@ -69,7 +68,7 @@
 
 
 <div class="row">
-<div class="col s12 m7">
+<div class="col s12">
 <h2 class="header">This Week's Profit</h2>
 <div class="card horizontal">
   <div class="card-stacked">
@@ -121,7 +120,7 @@
         <% for camp in Camp.all do %>
             <% if camp.start_date <= Date.today && camp.end_date >= Date.today %>
               <tr>
-                <td color="Black"><%= link_to camp.name, camp %></td>
+                <td style="Black"><%= link_to camp.name, camp %></td>
                 <td><%= camp.max_students %></td>
                 <td><%= camp.registrations.size %></td>
               </tr>
