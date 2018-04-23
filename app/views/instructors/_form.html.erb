@@ -7,6 +7,13 @@
       <%= f.input :bio, label_html: { class: 'active' } %>
       <%= f.input :user_id, collection: User.all, include_blank: true %>
       <%= f.input :active %>
+      </br>
+      <% if (current_user.role?(:admin) || current_user.role(:instructor)) %>
+        <div class="field">
+          <%= f.label :photo %><br />
+          <%= f.file_field :photo %>
+        </div>
+      <% end %>
     </div>
   </div>
   <div class="row">

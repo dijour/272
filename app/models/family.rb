@@ -26,6 +26,17 @@ class Family < ApplicationRecord
 
   before_update :handle_family_being_made_inactive
 
+  
+  def registration_number 
+    regs = Set.new
+    for reg in Registration.all
+      if self.students.include? reg.student
+        regs << reg.student
+      end
+    end
+    return regs
+  end
+
   private
   def handle_family_being_made_inactive
     if self.active == false
@@ -41,5 +52,6 @@ class Family < ApplicationRecord
   def make_students_inactive
     self.students.each{|s| s.make_inactive}
   end
+
 
 end

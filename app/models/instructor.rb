@@ -1,4 +1,5 @@
 class Instructor < ApplicationRecord
+  mount_uploader :photo, PhotoUploader
   include AppHelpers::Activeable::InstanceMethods
   extend AppHelpers::Activeable::ClassMethods
 
