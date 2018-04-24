@@ -66,7 +66,7 @@ class Ability
         user.id == uzer.id
       end
       
-      can :read, Student do |student|  
+      can :read, Student do |studz|  
 
         #can read students who are enrolled in camps they teach (past or upcoming)
         studs = Set.new
@@ -75,7 +75,7 @@ class Ability
             studs << student
           end
         end
-        studs.map {|s| s.id}.include? student.id
+        studs.include? studz
       end
       can :read, Family do |family|
         # can read families whose students are enrolled in camps the instructor teaches
@@ -86,7 +86,7 @@ class Ability
              fams << b
            end
         end
-        fams.include? family.id
+        fams.include? family
       end
 
       
@@ -114,6 +114,7 @@ class Ability
       can :create, User do |uzer|
         uzer.role == "parent"
       end
+      can :create, Family
       can :read, Camp
       can :read, Curriculum
       can :read, Location

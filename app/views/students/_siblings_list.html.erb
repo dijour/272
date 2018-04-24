@@ -10,13 +10,19 @@
           <th>Registered Camps</th>
           <th>Next Camp</th>
         </thead>
-          <% for student in @student.family.students.alphabetical %>
-            <% if student != @student %>
-            <tr>
-              <td><%= link_to student.proper_name, student_path(student) %></td>
-              <td><%= link_to student.registrations.size, student_path(student) %></td>
-              <td>&nbsp;<%= link_to student.camps.upcoming.first.start_date.strftime("%m/%d/%y"), camp_path(student.camps.upcoming.first) %></td>
-            </tr>
+          <% if @student.family.students.size == 1 %>
+            <%= "Student has no siblings" %> 
+          <% else %>
+            <% for student in @student.family.students.alphabetical %>
+              <% if student != @student %>
+              <tr>
+                <td><%= link_to student.proper_name, student_path(student) %></td>
+                <td><%= link_to student.registrations.size, student_path(student) %></td>
+                <td>&nbsp;
+                <%= link_to student.camps.upcoming.first.start_date.strftime("%m/%d/%y"), camp_path(student.camps.upcoming.first) %>
+                </td>
+              </tr>
+              <% end %>
             <% end %>
           <% end %>
       </table>

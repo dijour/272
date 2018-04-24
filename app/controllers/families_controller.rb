@@ -22,11 +22,20 @@ class FamiliesController < ApplicationController
   end
 
   def create
+    @user = User.new(user_params)
+    @user.role = "parent"
     @family = Family.new(family_params)
-    if @family.save
-      redirect_to family_path(@family), notice: "The #{@family.family_name} family was added to the system."
-    else
+    if !@user.save
+      @family.valid?
       render action: 'new'
+    else
+      @family.user_id = @user.id
+      if @family.save
+        flash[:notice] = "Successfully created #{@owner.proper_name}."
+        redirect_to owner_path(@owner) 
+      else
+        render action: 'new'
+      end      
     end
   end
 
