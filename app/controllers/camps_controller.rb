@@ -30,11 +30,14 @@ class CampsController < ApplicationController
   end
 
   def update
-    @camp.update(camp_params)
-    if @camp.save
-      redirect_to camp_path(@camp), notice: "#{@camp.name} was revised in the system."
-    else
-      render action: 'edit'
+    respond_to do |format|
+      if @camp.update_attributes(camp_params)
+        format.html { redirect_to(@camp, :notice => "Successfully updated #{@camp.name}.") }
+        format.json { respond_with_bip(@camp) }
+      else
+        format.html { render :action => "edit" }
+        format.json { respond_with_bip(@camp) }
+      end
     end
   end
 

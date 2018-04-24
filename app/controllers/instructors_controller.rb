@@ -5,10 +5,12 @@ class InstructorsController < ApplicationController
   before_action :set_instructor, only: [:show, :edit, :update, :destroy]
 
   def index
+    authorize! :index, @instructors
     @instructors = Instructor.all.alphabetical.paginate(:page => params[:page]).per_page(12)
   end
 
   def show
+    authorize! :show, @instructor
     @past_camps = @instructor.camps.past.chronological
     @upcoming_camps = @instructor.camps.upcoming.chronological
   end

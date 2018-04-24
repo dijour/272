@@ -5,12 +5,16 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'best_in_place', '~> 3.0.1'
+
 
 gem 'chartkick'
 
 gem 'groupdate'
 
+gem 'vuejs-rails'
 
+gem "mini_magick"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'

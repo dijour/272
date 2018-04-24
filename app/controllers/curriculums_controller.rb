@@ -29,11 +29,14 @@ class CurriculumsController < ApplicationController
   end
 
   def update
-    @curriculum.update(curriculum_params)
-    if @curriculum.save
-      redirect_to curriculum_path(@curriculum), notice: "#{@curriculum.name} was revised in the system."
-    else
-      render action: 'edit'
+    respond_to do |format|
+      if @curriculum.update_attributes(curriculum_params)
+        format.html { redirect_to(@curriculum, :notice => "Successfully updated #{@curriculum.name}.") }
+        format.json { respond_with_bip(@curriculum) }
+      else
+        format.html { render :action => "edit" }
+        format.json { respond_with_bip(@curriculum) }
+      end
     end
   end
 

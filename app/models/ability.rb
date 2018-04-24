@@ -49,7 +49,7 @@ class Ability
       end
       
       can :show, Instructor do |instr|
-        instr.id = user.instructor.id
+        instr.id == user.instructor.id
       end
       
       can :index, Instructor do |instr|

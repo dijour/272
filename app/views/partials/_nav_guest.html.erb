@@ -1,6 +1,7 @@
 <nav class="nav">
     <div class="nav-wrapper" style="background: -webkit-linear-gradient(45deg, #FF5252 0%, #6212e2 100%)">
-        <a href="<%= home_path %>"  class="brand-logo left">A&M Chess Camp</a>
+        <div class="container">
+        <a href="<%= home_path %>"  class="brand-logo left">A&M</a>
         <a href="#" data-activates="mobile-demo" class="button-collapse right"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><%= link_to "Curriculums", curriculums_path %></li>
@@ -14,5 +15,6 @@
           <li><%= link_to "Locations", locations_path %></li>
           <li><%= link_to 'Login', login_path %></li>
         </ul>
+        </div>
     </div>
 </nav>
