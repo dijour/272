@@ -17,8 +17,8 @@
 //= require highcharts
 //= require chartkick
 //= require best_in_place
-//= require_tree .
 //= require vue 
+//= require_tree .
 
 $( document ).ready(function(){
   $(".button-collapse").sideNav();

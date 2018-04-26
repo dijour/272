@@ -86,20 +86,20 @@ var new_form = Vue.component('new-dosage-form', {
 //////////////////////////////////////////
 ////***  The Vue instance itself  ***////
 /////////////////////////////////////////
-var dosages = new Vue({
+var instructors = new Vue({
 
-  el: '#camp_instructor_handling',
+  el: '#assignments',
 
   data: {
-    visit_id: 0,
-    dosages: [],
+    camp_id: 0,
+    instructors: [],
     modal_open: false,
     errors: {}
   },
 
   created() {
     // read the visit_id from the page when instance created
-    this.visit_id = $('#visit_id').val();
+    this.camp_id = $('#camp_id').val();
   },
 
   methods: {
@@ -107,12 +107,12 @@ var dosages = new Vue({
       this.modal_open = !(this.modal_open);
     },
 
-    get_dosages: function(){
-      run_ajax('GET', {}, '/visits/'.concat(this.visit_id, '/dosages.json'), function(res){dosages.dosages = res});
+    get_instructors: function(){
+      run_ajax('GET', {}, '/camps/'.concat(this.camp_id, '/instructors.json'), function(res){instructors.instructors = res});
     }
   },
 
   mounted: function(){
-    this.get_dosages();
+    this.get_instructors();
   }
 });

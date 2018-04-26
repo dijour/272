@@ -22,17 +22,18 @@ class FamiliesController < ApplicationController
   end
 
   def create
+    @family = Family.new(family_params)
     @user = User.new(user_params)
     @user.role = "parent"
-    @family = Family.new(family_params)
+
     if !@user.save
       @family.valid?
       render action: 'new'
     else
       @family.user_id = @user.id
       if @family.save
-        flash[:notice] = "Successfully created #{@owner.proper_name}."
-        redirect_to owner_path(@owner) 
+        flash[:notice] = "Successfully created #{@family.family_name}."
+        redirect_to family_path(@family) 
       else
         render action: 'new'
       end      
@@ -58,6 +59,12 @@ class FamiliesController < ApplicationController
     end
 
     def family_params
-      params.require(:family).permit(:family_name, :parent_first_name, :user_id, :active)
+      params.require(:family).permit(:family_name, :parent_first_name, :active, :username, :password, :password_confirmation)
     end
+    
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def user_params
+      params.require(:family).permit(:user_name, :email, :phone, :role, :password, :password_confirmation, :active)
+    end
+
 end
