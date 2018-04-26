@@ -25,7 +25,8 @@ Rails.application.routes.draw do
 
 
   # Routes for managing camp instructors
-  get 'camp_instructors/new', to: 'camp_instructors#new', as: :new_camp_instructor
-  post 'camp_instructors', to: 'camp_instructors#create', as: :camp_instructors
-  delete 'camp_instructors', to: 'camp_instructors#destroy', as: :camp_instructor
+  get 'camps/:id/instructors', to:'camps#instructors', as: :camp_instructors
+  post 'camps/:id/instructors', to:'camp_instructors#create', as: :add_instructors
+  delete 'camps/:id/instructors', to:'camp_instructors#destroy', as: :remove_instructors
+  
 end

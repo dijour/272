@@ -111,9 +111,7 @@ class Ability
 
       
     elsif user.role.nil?
-      can :create, User do |uzer|
-        uzer.role == "parent"
-      end
+      can :create, User
       can :create, Family
       can :read, Camp
       can :read, Curriculum

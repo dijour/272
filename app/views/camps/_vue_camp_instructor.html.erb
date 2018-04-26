@@ -3,6 +3,7 @@
   <div class="card indigo lighten-2">
     <div class="card-content white-text">
       <span class="card-title">Camp Instructors</span>
+      <p v-model="camp_id"> "The camp id is #{ camp_id }" </p>
   	  <% if @instructors.empty? %>
   		<p>No instructors at this time</p>
   	  <% else %>

@@ -50,12 +50,12 @@ Vue.component('camp_instructor-row', {
 /////////////////////////////////////////
 //// A component for adding a new dosage
 /////////////////////////////////////////
-var new_form = Vue.component('new-dosage-form', {
-  template: '#dosage-form-template',
+var new_form = Vue.component('new-instructor-form', {
+  template: '#instructor-form-template',
 
   mounted() {
     // need to reconnect the materialize select javascript 
-    $('#dosage_medicine_id').material_select()
+    $('#instructor_medicine_id').material_select()
   },
 
   data: function () {
@@ -72,7 +72,7 @@ var new_form = Vue.component('new-dosage-form', {
     submitForm: function (x) {
       new_post = {
         medicine_id: this.medicine_id,
-        visit_id: this.visit_id,
+        camp_id: this.camp_id,
         units_given: this.units_given,
         discount: this.discount
       }
