@@ -110,7 +110,7 @@ class Ability
       end
 
       
-    elsif user.role.nil?
+    else
       can :create, User
       can :create, Family
       can :read, Camp

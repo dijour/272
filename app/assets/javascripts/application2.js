@@ -14,5 +14,32 @@
 //= require rails-ujs
 //= require materialize-sprockets
 //= require materialize-form
-//= require vue
+//= require highcharts
+//= require chartkick
+//= require best_in_place
+//= require vue 
 //= require_tree .
+
+$( document ).ready(function(){
+  $(".button-collapse").sideNav();
+});
+
+$(document).ready(function(){
+$('.slider').slider();
+});
+
+// $( document ).ready(function () {
+//     $('.sidenav').sidenav();
+//     $('select').material_select();
+//     $('.datepicker').pickadate({
+//     format: 'mmmm dd, yyyy',
+//     formatSubmit: 'mmmm dd, yyyy',
+//     selectMonths: true, // Creates a dropdown to control month
+//     selectYears: 15, // Creates a dropdown of 15 years to control year,
+//     today: 'Today',
+//     clear: 'Clear',
+//     close: 'Ok',
+//     closeOnSelect: false // Close upon selecting a date,
+//   });
+// });
+        

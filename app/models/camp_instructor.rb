@@ -13,6 +13,15 @@ class CampInstructor < ApplicationRecord
   validate :instructor_is_active_in_system
   validate :camp_is_active_in_system
 
+  # class methods
+  def self.for_camp(camp)
+    # the 'instructive way'... (which I told you if you asked me for help)
+    CampInstructor.where(camp_id: camp.id)
+    # the easy way... 
+    # camp.instructors
+  end
+  
+
   private
   def instructor_is_not_already_assigned_to_camp
     return true if self.camp.nil? || self.instructor.nil?

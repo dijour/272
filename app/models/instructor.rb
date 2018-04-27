@@ -1,3 +1,5 @@
+require 'set'
+
 class Instructor < ApplicationRecord
   mount_uploader :photo, PhotoUploader
   include AppHelpers::Activeable::InstanceMethods
@@ -23,6 +25,20 @@ class Instructor < ApplicationRecord
     # the easy way... 
     # camp.instructors
   end
+  
+  def self.not_for_camp(camp)
+    # the 'instructive way'... (which I told you if you asked me for help)
+    structs = Set.new
+    for instructor in Instructor.active.alphabetical
+      structs << instructor 
+    end
+    for assignment in CampInstructor.for_camp(camp)
+      structs.delete(assignment.instructor)
+    end
+    return structs
+  end
+  
+  
 
   # delegates
   delegate :email, to: :user, allow_nil: true
