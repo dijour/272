@@ -1,0 +1,17 @@
+<div class="card indigo lighten-2">
+  <div class="card-content white-text">
+    <span class="card-title">Register</span>
+	  <% if @camp.max_students - @camp.registrations.count == 0 %>
+		<p>This camp is fully booked.</p>
+	  <% else %>
+      <ul>
+        <h2> <%= "#{@camp.max_students - @camp.registrations.count} spots remaining!" %> </h2>
+        <h5>No account? Create one!</h5>
+        <br>
+        <td><%= link_to 'New family', new_family_path, :class=>"btn waves-effect waves-light blue" %></td>
+        <% end %>
+      </ul>
+    </div>
+</div>
+
+

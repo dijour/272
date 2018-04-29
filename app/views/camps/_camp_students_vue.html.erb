@@ -15,7 +15,7 @@
       <% end %>
       <div class="card-action">
       <%# link_to "Add a new instructor", "#" %>
-      <% if can? :create, Registrations %>
+      <% if can? :create, Registration %>
         <%= link_to "Add a new student", "#", {%s(v-on:click) => "switch_modal()"} %>
       <% end %> 
 

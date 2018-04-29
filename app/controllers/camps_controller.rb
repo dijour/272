@@ -49,6 +49,10 @@ class CampsController < ApplicationController
   def instructors
     @instructors = @camp.instructors.alphabetical
   end
+  
+  def students
+    @students = @camp.students.alphabetical
+  end
 
   private
     def set_camp

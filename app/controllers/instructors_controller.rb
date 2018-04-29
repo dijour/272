@@ -1,6 +1,8 @@
 class InstructorsController < ApplicationController
   authorize_resource  
 
+###unknown attribute 'email' for Instructor. when editing instructor
+
 
   before_action :set_instructor, only: [:show, :edit, :update, :destroy]
 
@@ -24,10 +26,20 @@ class InstructorsController < ApplicationController
 
   def create
     @instructor = Instructor.new(instructor_params)
-    if @instructor.save
-      redirect_to instructor_path(@instructor), notice: "#{@instructor.first_name} #{@instructor.last_name} was added to the system."
-    else
+    @user = User.new(user_params)
+    @user.role = "instructor"
+
+    if !@user.save
+      @instructor.valid?
       render action: 'new'
+    else
+      @instructor.user_id = @user.id
+      if @instructor.save
+        flash[:notice] = "Successfully created #{@instructor.proper_name}."
+        redirect_to instructor_path(@instructor) 
+      else
+        render action: 'new'
+      end      
     end
   end
 
@@ -52,4 +64,9 @@ class InstructorsController < ApplicationController
     def instructor_params
       params.require(:instructor).permit(:first_name, :last_name, :bio, :user_id, :email, :phone, :photo, :active)
     end
+    
+    def user_params
+      params.require(:instructor).permit(:username, :email, :phone, :role, :password, :password_confirmation, :active)
+    end
+
 end

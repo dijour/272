@@ -6,7 +6,12 @@
     <% if can? :read, Instructor %>
       <%= render :partial => "camp_instructors_vue"%>
     <% end %> 
-    <%= render :partial => "camp_students"%>
+    <% if can? :read, Student %>
+      <%= render :partial => "camp_students_vue"%>
+    <% end %> 
+    <% if current_user.nil? %> 
+      <%= render :partial => "camp_spots"%>
+    <% end %> 
     <%# if can? :create, Instructor %>
       <!--<button v-on:click="switch_modal()">Add Chore</button>-->
     <%# end %>

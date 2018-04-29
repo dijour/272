@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   #before_action :check_login
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-
   # GET /users/new
   def new
     @user = User.new

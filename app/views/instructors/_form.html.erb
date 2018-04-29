@@ -2,13 +2,18 @@
   <%= f.error_notification %>
   <div class="row">
     <div class="form-inputs">
+      <%= f.input :username, label_html: { class: 'active' } %>
+      <%= f.input :password, label_html: { class: 'active' } %>
+      <%= f.input :password_confirmation, label_html: { class: 'active' } %>
+      <%= f.input :email, label_html: { class: 'active' } %>
+      <%= f.input :phone, label_html: { class: 'active' } %>
       <%= f.input :first_name, label_html: { class: 'active' } %>
       <%= f.input :last_name, label_html: { class: 'active' } %>
       <%= f.input :bio, label_html: { class: 'active' } %>
-      <%= f.input :user_id, collection: User.all, include_blank: true %>
+      <%# f.input :user_id, collection: User.all, include_blank: true %>
       <%= f.input :active %>
       </br>
-      <% if (current_user.role?(:admin) || current_user.role(:instructor)) %>
+      <% if (current_user.role?(:admin) || current_user.role?(:instructor)) %>
         <div class="field">
           <%= f.label :photo %><br />
           <%= f.file_field :photo %>

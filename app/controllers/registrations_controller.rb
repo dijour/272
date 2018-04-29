@@ -21,11 +21,22 @@ class RegistrationsController < ApplicationController
     end
   end
  
+  # def destroy
+  #   @registration = Registration.find(params[:id])
+  #   @registration.destroy
+  #   flash[:notice] = "Successfully removed this instructor."
+  #   redirect_to camp_path(@registration.camp)
+  # end
+
+
   def destroy
-    @registration = Registration.find(params[:id])
-    @registration.destroy
-    flash[:notice] = "Successfully removed this instructor."
-    redirect_to camp_path(@registration.camp)
+    camp_id = params[:id]
+    student_id = params[:student_id]
+    @registration = Registration.where(camp_id: camp_id, student_id: instructor_id).first
+    unless @registration.nil?
+      @registration.destroy
+      flash[:notice] = "Successfully removed this registration."
+    end
   end
 
   private

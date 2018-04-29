@@ -2,7 +2,7 @@
 //// Setting up a general ajax method to handle
 //// transfer of data between client and server
 ////////////////////////////////////////////////
-function run_ajax(method, data, link, callback=function(res){instructors.get_instructors()}){
+function run_ajax(method, data, link, callback=function(res){students.get_students()}){
   $.ajax({
     method: method,
     data: data,
@@ -19,7 +19,7 @@ function run_ajax(method, data, link, callback=function(res){instructors.get_ins
 }
 
 ///////////////////////////////////////////////////////
-//// A component to create a camp instructor list item
+//// A component to create a camp student list item
 ///////////////////////////////////////////////////////
 Vue.component('student-row', {
 
@@ -31,7 +31,7 @@ Vue.component('student-row', {
   `,
 
   props: {
-    instructor: Object
+    student: Object
   },
 
   data: function () {
@@ -45,7 +45,7 @@ Vue.component('student-row', {
   },
 
   methods: {
-    remove_record: function(instructor){
+    remove_record: function(student){
       run_ajax('DELETE', {student: student}, '/camps/'.concat(this.camp_id, '/students/',student['id'],'.json'));
     }
   }
@@ -53,20 +53,20 @@ Vue.component('student-row', {
 
 
 /////////////////////////////////////////////
-//// A component for adding a new instructor
+//// A component for adding a new student
 /////////////////////////////////////////////
 var new_form = Vue.component('new-student-form', {
   template: '#camp-student-form-template',
 
   mounted() {
     // need to reconnect the materialize select javascript 
-    $('#camp_instructor_instructor_id').material_select()
+    $('#camp_student_id').material_select()
   },
 
   data: function () {
     return {
         camp_id: 0,
-        instructor_id: 0,
+        student_id: 0,
         errors: {}
     }
   },
@@ -75,9 +75,9 @@ var new_form = Vue.component('new-student-form', {
     submitForm: function (x) {
       new_post = {
         camp_id: this.camp_id,
-        instructor_id: this.instructor_id
+        student_id: this.student_id
       }
-      run_ajax('POST', {instructor: new_post}, '/camp_instructors.json')
+      run_ajax('POST', {student: new_post}, '/students.json')
       this.switch_modal()
     }
   },
@@ -88,13 +88,13 @@ var new_form = Vue.component('new-student-form', {
 //////////////////////////////////////////
 ////***  The Vue instance itself  ***////
 /////////////////////////////////////////
-var instructors = new Vue({
+var students = new Vue({
 
-  el: '#assignments',
+  el: '#registrations',
 
   data: {
     camp_id: 0,
-    instructors: [],
+    students: [],
     modal_open: false,
     errors: {}
   },
@@ -108,12 +108,12 @@ var instructors = new Vue({
       this.modal_open = !(this.modal_open);
     },
 
-    get_instructors: function(){
-      run_ajax('GET', {}, '/camps/'.concat(this.camp_id, '/instructors.json'), function(res){instructors.instructors = res});
+    get_students: function(){
+      run_ajax('GET', {}, '/camps/'.concat(this.camp_id, '/students.json'), function(res){students.students = res});
     }
   },
 
   mounted: function(){
-    this.get_instructors();
+    this.get_students();
   }
 });
