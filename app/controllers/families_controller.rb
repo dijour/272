@@ -1,6 +1,8 @@
 class FamiliesController < ApplicationController
   authorize_resource  
 
+# ActiveModel::UnknownAttributeError in FamiliesController#create
+# unknown attribute 'email' for Family.
 
   before_action :set_family, only: [:show, :edit, :update, :destroy]
 
@@ -33,7 +35,15 @@ class FamiliesController < ApplicationController
       @family.user_id = @user.id
       if @family.save
         flash[:notice] = "Successfully created #{@family.family_name}."
-        redirect_to family_path(@family) 
+
+        user = User.find_by_email(@user.email)
+        if user && User.authenticate(@user.email, @user.password)
+          session[:user_id] = user.id
+          redirect_to home_path, notice: "Logged in!" 
+        else
+          render action: 'new'
+          flash[:notice] = "Some error."
+        end
       else
         render action: 'new'
       end      

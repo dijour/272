@@ -6,7 +6,7 @@
     <% if can? :read, Instructor %>
       <%= render :partial => "camp_instructors_vue"%>
     <% end %> 
-    <% if can? :read, Student %>
+    <% if can? :show, Student %>
       <%= render :partial => "camp_students_vue"%>
     <% end %> 
     <% if current_user.nil? %> 

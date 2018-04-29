@@ -3,7 +3,7 @@ class Family < ApplicationRecord
   include AppHelpers::Activeable::InstanceMethods
   extend AppHelpers::Activeable::ClassMethods
 
-  attr_accessor :username, :password, :password_confirmation
+  attr_accessor :username, :password, :password_confirmation, :email, :phone
 
 
   # relationships

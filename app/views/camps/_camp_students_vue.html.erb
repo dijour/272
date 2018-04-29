@@ -5,7 +5,7 @@
     <div class="card-content white-text">
       <span class="card-title">Registered Students</span>
       <% if @camp.students.empty? %>
-      <p>No instructors at this time</p>
+      <p>No students at this time</p>
       <% else %>
         <ul is='student-row' 
             v-for="student in students" 
@@ -13,13 +13,15 @@
             class="no_bullet">  
         </ul>
       <% end %>
-      <div class="card-action">
-      <%# link_to "Add a new instructor", "#" %>
-      <% if can? :create, Registration %>
-        <%= link_to "Add a new student", "#", {%s(v-on:click) => "switch_modal()"} %>
-      <% end %> 
-
-      </div>
+      <% if ! @camp.is_full? %>
+        <div class="card-action">
+        <%# link_to "Add a new instructor", "#" %>
+        <% if can? :create, Registration && %>
+            <%= link_to "Add a new student", "#", {%s(v-on:click) => "switch_modal()"} %>
+        <% end %> 
+      <% end %>
+  
+        </div>
     </div>
   </div>
 
