@@ -115,7 +115,6 @@ class Ability
       can :create, Family
       can :read, Camp
       can :read, Curriculum
-      can :read, Location
       
     end
   

@@ -32,7 +32,7 @@ class RegistrationsController < ApplicationController
   def destroy
     camp_id = params[:id]
     student_id = params[:student_id]
-    @registration = Registration.where(camp_id: camp_id, student_id: instructor_id).first
+    @registration = Registration.where(camp_id: camp_id, student_id: student_id).first
     unless @registration.nil?
       @registration.destroy
       flash[:notice] = "Successfully removed this registration."
