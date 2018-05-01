@@ -7,6 +7,7 @@ end
 
 gem 'best_in_place', '~> 3.0.1'
 
+gem 'card-js-rails', '~> 1.0'
 
 gem 'chartkick'
 

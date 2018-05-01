@@ -1,0 +1,10 @@
+<%= f.input :first_name, label_html: { class: 'active' } %>
+<%= f.input :last_name, label_html: { class: 'active' } %>
+<%= f.input :bio, label_html: { class: 'active' } %>
+<%= f.input :active, label_html: { class: 'active' }  %>
+<% if (current_user.role?(:admin) || current_user.role?(:instructor)) %>
+<div class="field">
+  <%= f.label :photo %><br />
+  <%= f.file_field :photo %>
+</div>
+<% end %>

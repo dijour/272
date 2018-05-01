@@ -10,7 +10,12 @@
         <%= f.error_notification %>
         <div class="row">
           <div class="form-inputs">
-            <%= f.input :student_id, collection: Student.active.alphabetical.to_a, include_blank: true %>
+            <% if current_user.role == "admin" %>
+              <%= f.input :student_id, collection: Student.active.at_or_above_rating(@camp.curriculum.min_rating).below_rating(@camp.curriculum.max_rating).alphabetical.to_a, include_blank: true %>
+            <% end %>
+            <% if current_user.role == "parent" %>
+              <%= f.input :student_id, collection: current_user.family.students.at_or_above_rating(@camp.curriculum.min_rating).below_rating(@camp.curriculum.max_rating).alphabetical.to_a, include_blank: true %>
+            <% end %>
             <%= f.input :camp_id, as: :hidden, input_html: { value: @camp.id } %>
           </div>
         </div>

@@ -1,5 +1,5 @@
 class CampsController < ApplicationController
-  authorize_resource  
+  #authorize_resource  
 
   before_action :set_camp, only: [:show, :edit, :update, :destroy, :instructors, :students]
 

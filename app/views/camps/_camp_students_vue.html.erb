@@ -16,8 +16,13 @@
       <% if ! @camp.is_full? %>
         <div class="card-action">
         <%# link_to "Add a new instructor", "#" %>
-        <% if can? :create, Registration && %>
+        <% if ! current_user.nil? && (current_user.role == "parent" || current_user.role == "admin") %>
+          <div v-if="modal_open">
+            <%= link_to "Cancel", "#", {%s(v-on:click) => "switch_modal()"} %>
+          </div>
+          <div v-else>
             <%= link_to "Add a new student", "#", {%s(v-on:click) => "switch_modal()"} %>
+          </div>
         <% end %> 
       <% end %>
   

@@ -105,6 +105,7 @@ class Ability
       end
       can :read, Curriculum
       can :read, Camp
+      can :read, Location
       can :create, Registration do |registration|
         user.family.students.include? registration.student
       end

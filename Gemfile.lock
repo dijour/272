@@ -65,6 +65,8 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (>= 2.0, < 4.0)
+    card-js-rails (1.0.13.1)
+      rails (>= 4.0.1)
     carrierwave (1.2.2)
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
@@ -294,6 +296,7 @@ DEPENDENCIES
   byebug
   cancancan
   capybara (~> 2.13)
+  card-js-rails (~> 1.0)
   carrierwave
   chartkick
   coffee-rails (~> 4.2)

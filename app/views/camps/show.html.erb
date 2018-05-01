@@ -6,7 +6,7 @@
     <% if can? :read, Instructor %>
       <%= render :partial => "camp_instructors_vue"%>
     <% end %> 
-    <% if can? :show, Student %>
+    <% if ! current_user.nil? && (current_user.role == "parent" ||  current_user.role == "admin") %>
       <%= render :partial => "camp_students_vue"%>
     <% end %> 
     <% if current_user.nil? %> 

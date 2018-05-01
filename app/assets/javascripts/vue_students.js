@@ -60,7 +60,7 @@
   
     mounted() {
       // need to reconnect the materialize select javascript 
-      $('#camp_student_id').material_select()
+      $('#registration_student_id').material_select()
     },
   
     data: function () {
