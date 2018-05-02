@@ -33,8 +33,10 @@ Rails.application.routes.draw do
   
   # Routes for managing registrations
   get 'camps/:id/students', to: 'camps#students', as: :camp_students
-  post 'camps/:id/students', to: 'registrations#create', as: :create_registration
+  post 'camps/:id/students', to: 'registrations#add_to_cart', as: :create_registration
   delete 'camps/:id/students/:student_id', to: 'registrations#destroy', as: :remove_registration
+  
+  
   
   
 end

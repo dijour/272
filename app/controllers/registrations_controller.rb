@@ -1,7 +1,9 @@
 class RegistrationsController < ApplicationController
+  include AppHelpers::Cart
   
   authorize_resource  
 
+  ## NEED HELP GETTING CART TO SHOW SHIT
   
   def new
     @registration   = Registration.new
@@ -20,6 +22,15 @@ class RegistrationsController < ApplicationController
       render action: 'new', locals: { camp: @camp, other_students: @other_students }
     end
   end
+ 
+ def add_to_cart
+    foo = params[:foo_param]
+    @registration = Registration.new(registration_params)
+    @camp = Camp.find(params[:registration][:camp_id])
+    @student = Student.find(params[:registration][:student_id])
+    add_registration_to_cart(@camp.id, @student.id)
+ end
+  
  
   # def destroy
   #   @registration = Registration.find(params[:id])

@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+
+<% if @users.empty? %>
+  <h3>There are no users in the system at this time</h3>
+<% else %>
+  <h3>Users</h3>
+
+  <table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <% if user.role == "instructor" %>
+            <td><%= link_to user.instructor, instructor %></td>
+        <% end %>
+        <% if user.role == "parent" %>
+            <td><%= link_to user.family, family %></td>
+        <% end %>
+        <td><%= user.email %></td>
+        <td><%= number_to_phone user.phone %></td>
+        <% if can? :update, User %>
+          <td><%= link_to 'Edit', edit_user_path(user), :class=>"btn waves-effect waves-light gradient-45deg-red-pink mt-2 btn-small z-depth-5" %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span class="paginate">
+  <%= will_paginate @users, :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next", :param_name => 'users' %>
+</span>
+
+    <% end %>
+
+<% if can? :create, User %>
+  <td><%= link_to 'New User', new_user_path, :class=>"btn waves-effect waves-light gradient-45deg-red-pink mt-2 btn-small z-depth-5" %></td>
+<% end %>
+
