@@ -1,9 +1,6 @@
 class InstructorsController < ApplicationController
   authorize_resource  
 
-###unknown attribute 'email' for Instructor. when editing instructor
-
-
   before_action :set_instructor, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -54,6 +51,9 @@ class InstructorsController < ApplicationController
   def destroy
     @instructor.destroy
     redirect_to instructors_url, notice: "#{@instructor.first_name} #{@instructor.last_name} was deleted from the system."
+  end
+
+  def change_pass
   end
 
   private

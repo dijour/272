@@ -9,6 +9,10 @@
     <% if ! current_user.nil? && (current_user.role == "parent" ||  current_user.role == "admin") %>
       <%= render :partial => "camp_students_vue"%>
     <% end %> 
+    <% if ! current_user.nil? && (current_user.role == "instructor") %>
+      <%= render :partial => "camp_instructors"%>
+      <%= render :partial => "camp_students"%>
+    <% end %> 
     <% if current_user.nil? %> 
       <%= render :partial => "camp_spots"%>
     <% end %> 

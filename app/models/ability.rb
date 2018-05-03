@@ -3,6 +3,7 @@ require 'byebug'
 
 class Ability
   include CanCan::Ability
+  include AppHelpers::Cart
 
   def initialize(user)
     # Define abilities for the passed in user here. For example:
@@ -38,6 +39,9 @@ class Ability
       can :manage, :all
     
     elsif user.role? :instructor
+    
+    #why am I able to edit instructors that aren't me, but I can't see their show pages?
+    
       can :read, Curriculum
       
       can :read, Camp
@@ -52,15 +56,15 @@ class Ability
         instr.id == user.instructor.id
       end
       
-      can :index, Instructor do |instr|
-        instructlist = Set.new
-        for camp in user.instructor.camps
-          for struct in camp.instructors
-            instructlist << struct
-          end
-        end
-        instructlist.include? instr.id
-      end
+      # can :index, Instructor do |instr|
+      #   instructlist = Set.new
+      #   for camp in user.instructor.camps
+      #     for struct in camp.instructors
+      #       instructlist << struct
+      #     end
+      #   end
+      #   instructlist.include? instr.id
+      # end
       
       can :update, User do |uzer|  
         user.id == uzer.id
@@ -91,7 +95,7 @@ class Ability
 
       
     elsif user.role? :parent
-      can :show, Student do |student|
+      can :manage, Student do |student|
         user.family.students.include? student
       end
       can :update, Student do |student|
@@ -99,6 +103,9 @@ class Ability
       end
       can :update, Family do |family|  
         family.id == user.family.id
+      end
+      can :update, User do |uzr|  
+        uzr.id == user.id
       end
       can :show, Family do |family|
         family.id == user.family.id

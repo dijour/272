@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new', :as => :login
   get 'logout' => 'sessions#destroy', :as => :logout
 
+  get 'instructors/:instructor_id/show' => 'instructors#change_pass', :as => :edit_instructor_password
 
   # Routes for managing camp instructors
   get 'camps/:id/instructors', to: 'camps#instructors', as: :camp_instructors
@@ -33,10 +34,7 @@ Rails.application.routes.draw do
   
   # Routes for managing registrations
   get 'camps/:id/students', to: 'camps#students', as: :camp_students
-  post 'camps/:id/students', to: 'registrations#add_to_cart', as: :create_registration
+  get 'camps/:id/students/add', to: 'carts#add_to_cart', as: :add_to_cart
   delete 'camps/:id/students/:student_id', to: 'registrations#destroy', as: :remove_registration
-  
-  
-  
   
 end

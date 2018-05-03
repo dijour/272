@@ -10,6 +10,12 @@
 <div class="row">
   <div class="col s12">
     <%= render :partial => "partials/object_options", locals: {model_name: "instructor", object: @instructor} %>
+    <% if can? :edit, Instructor %>
+        <%= link_to(eval("edit_instructor_password_path(@instructor)"), class: 'waves-effect waves-light btn') do %>
+            &nbsp;<%= "Edit " %>
+        <% end %>
+        &nbsp;&nbsp;
+    <% end %>
   </div>
 </div>
 

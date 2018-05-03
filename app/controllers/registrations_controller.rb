@@ -23,15 +23,6 @@ class RegistrationsController < ApplicationController
     end
   end
  
- def add_to_cart
-    foo = params[:foo_param]
-    @registration = Registration.new(registration_params)
-    @camp = Camp.find(params[:registration][:camp_id])
-    @student = Student.find(params[:registration][:student_id])
-    add_registration_to_cart(@camp.id, @student.id)
- end
-  
- 
   # def destroy
   #   @registration = Registration.find(params[:id])
   #   @registration.destroy
