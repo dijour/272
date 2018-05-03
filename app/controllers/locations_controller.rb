@@ -30,10 +30,14 @@ class LocationsController < ApplicationController
   end
 
   def update
-    if @location.update(location_params)
-      redirect_to location_path(@location), notice: "#{@location.name} location was revised in the system."
-    else
-      render action: 'edit'
+    respond_to do |format|
+      if @location.update_attributes(location_params)
+        format.html { redirect_to(@location, :notice => "Successfully updated #{@location.name}.") }
+        format.json { respond_with_bip(@location) }
+      else
+        format.html { render :action => "edit" }
+        format.json { respond_with_bip(@location) }
+      end
     end
   end
 

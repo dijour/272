@@ -6,7 +6,8 @@
 
 <p>
   <strong>Maximum Capacity:</strong>
-  <%= @location.max_capacity %>
+  <%# @location.max_capacity %>
+  <%= best_in_place @location, :max_capacity, as: :input %>
 </p>
 
 <p>

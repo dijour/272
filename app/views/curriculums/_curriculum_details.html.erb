@@ -2,7 +2,8 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @curriculum.name %>
+  <%= best_in_place @curriculum, :name, as: :input %>
+  <%# @curriculum.name %>
 </p>
 
 <p>

@@ -1,5 +1,7 @@
 <%= location.street_1 %><br />
+<%= best_in_place @location, :street_1, as: :input %>
 <% unless location.street_2.blank? %>
 	<%= location.street_2 %><br />
+	<%= best_in_place @location, :street_2, as: :input %>
 <% end %>
 <%= location.city %>, <%= location.state %> <%= location.zip %>
