@@ -5,6 +5,9 @@ class CartsController < ApplicationController
   
   def index
     @cart = session[:cart]
+    @total_price = calculate_total_cart_registration_cost
+    @ids = get_array_of_ids_for_generating_registrations
+    
   end
   
   def destroy
