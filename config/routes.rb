@@ -37,4 +37,9 @@ Rails.application.routes.draw do
   get 'camps/:id/students/add', to: 'carts#add_to_cart', as: :add_to_cart
   delete 'camps/:id/students/:student_id', to: 'registrations#destroy', as: :remove_registration
   
+  # Routes for managing carts
+  
+  # delete 'carts/', to: 'carts#destroy', as: :remove_cart_item
+  delete "carts/delete_from_cart/:camp_id/:student_id" => "carts#delete_from_cart", as: :delete_from_cart
+  post "carts/checkout/:credit_card_num/:expiration_year/:expiration_month" => "carts#checkout", as: :checkout
 end

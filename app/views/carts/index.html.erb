@@ -8,6 +8,8 @@
 </head>
 <body>
     
+    <% @credit_card_num = 0, @expiration_month = 0, @expiration_year = 0 %>
+    
     <% if @cart.empty? %>
       <h4 align="center">There are no items in your cart at this time.</h4>
     <% else %>
@@ -30,12 +32,8 @@
             <td><%= ci["student_name"] %></td>
             <td><%= ci["camp_name"] %></td>
             <td><%= ci["date"].to_date.strftime("%m/%d/%y") %></td>
-            <td><%= "$#{ci["cost"]}0" %></td>
-            <!--<td class="align_center">-->
-            <!--    <%# link_to(destroy_cart_path(), method: :delete, data: { confirm: 'Are you sure you wish to delete this information?' }) do %>-->
-            <!--        <i class="material-icons">delete</i>-->
-            <!--    <%# end %>-->
-            <!--</td>-->
+            <td><%= number_to_currency(ci["cost"]) %></td>
+            <td><a data-method="delete" href="<%= delete_from_cart_path(ci["ids"][0], ci["ids"][1]) %>" rel="nofollow">Delete</a></td>
           </tr>
         <% end %>
       </tbody>
@@ -43,9 +41,10 @@
     <% end %>
     
     <% if ! @cart.empty? %>
-        <h3 align="center"><%= "Total: $#{@total_price}0" %></h3>
+        <h3 align="center"><%= "Total: #{number_to_currency(@total_price)}" %></h3>
     
         <h1> Checkout </h1>
+        
     
     
     <style>
@@ -68,6 +67,7 @@
 
         <div class="form-container active">
             <form action="">
+                
                 <input placeholder="Card number" type="tel" name="number">
                 <input placeholder="Full name" type="text" name="name">
                 <input placeholder="MM/YY" type="tel" name="expiry">
@@ -84,7 +84,11 @@
     </script>
     
     
+    <%= f.input :credit_card_num, label_html: { class: 'active' } %>
+    <%= f.input :expiration_month, label_html: { class: 'active' } %>
+    <%= f.input :expiration_year, label_html: { class: 'active' } %>
     
+    <a data-method="post" href="<%= checkout_path(@credit_card_num, @expiration_year, @expiration_month) %>" rel="nofollow">Checkout</a>
     
 </body>
 <% end %>
