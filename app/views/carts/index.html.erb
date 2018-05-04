@@ -7,7 +7,47 @@
     <!-- CSS is included through the card.js script -->
 </head>
 <body>
-    <%= @total_price %>
+    
+    <% if @cart.empty? %>
+      <h4 align="center">There are no items in your cart at this time.</h4>
+    <% else %>
+      <h3>Cart</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Student</th>
+          <th>Camp</th>
+          <th>Start Date</th>
+          <th>Cost</th>
+          <th class="align_center">Options</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+    
+      <tbody>
+        <% session[:cart].each do |ci| %>
+          <tr>
+            <td><%= ci["student_name"] %></td>
+            <td><%= ci["camp_name"] %></td>
+            <td><%= ci["date"].to_date.strftime("%m/%d/%y") %></td>
+            <td><%= "$#{ci["cost"]}0" %></td>
+            <!--<td class="align_center">-->
+            <!--    <%# link_to(destroy_cart_path(), method: :delete, data: { confirm: 'Are you sure you wish to delete this information?' }) do %>-->
+            <!--        <i class="material-icons">delete</i>-->
+            <!--    <%# end %>-->
+            <!--</td>-->
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% end %>
+    
+    <% if ! @cart.empty? %>
+        <h3 align="center"><%= "Total: $#{@total_price}0" %></h3>
+    
+        <h1> Checkout </h1>
+    
+    
     <style>
         .demo-container {
             width: 100%;
@@ -42,5 +82,13 @@
             container: '.card-wrapper'
         });
     </script>
+    
+    
+    
+    
 </body>
+<% end %>
+
+
+
 </html>

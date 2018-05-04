@@ -2,13 +2,20 @@
 
 <p>
   <strong>Name:</strong>
-  <%= best_in_place @curriculum, :name, as: :input %>
-  <%# @curriculum.name %>
+  <% if ! current_user.nil? and current_user.role == "admin" %>
+    <%= best_in_place @curriculum, :name, as: :input %>
+  <% else %>
+    <%= @curriculum.name %>
+  <% end %>
 </p>
 
 <p>
   <strong>Description:</strong>
-  <%= best_in_place @curriculum, :description, as: :input %>
+  <% if ! current_user.nil? and current_user.role == "admin" %>
+    <%= best_in_place @curriculum, :description, as: :input %>
+  <% else %>
+    <%= @curriculum.description %>
+  <% end %>
 </p>
 
 <p>

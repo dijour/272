@@ -7,11 +7,10 @@ class CartsController < ApplicationController
     @cart = session[:cart]
     @total_price = calculate_total_cart_registration_cost
     @ids = get_array_of_ids_for_generating_registrations
-    
   end
   
-  def destroy
-    
+  def destroy(camp_id, student_id)
+    remove_registration_from_cart(camp_id, student_id)
   end
 
  def add_to_cart

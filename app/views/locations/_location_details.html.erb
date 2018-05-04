@@ -6,8 +6,12 @@
 
 <p>
   <strong>Maximum Capacity:</strong>
-  <%# @location.max_capacity %>
-  <%= best_in_place @location, :max_capacity, as: :input %>
+  
+  <% if ! current_user.nil? and current_user.role == "admin" %>
+    <%= best_in_place @location, :max_capacity, as: :input %>
+  <% else %>
+    <%= @location.max_capacity %>
+  <% end %>
 </p>
 
 <p>
