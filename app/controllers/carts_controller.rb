@@ -42,31 +42,39 @@ class CartsController < ApplicationController
   end
  
   def checkout
-    # byebug
-    @credit_card_num = params[:number].to_i
+    @credit_card_num = params[:number].to_s.gsub(/\s+/, "")
     @exp_year = params[:expiry].chomp(" ").split("/")[1].gsub(/\s+/, "").to_i
     @exp_month = params[:expiry].chomp(" ").split("/")[0].gsub(/\s+/, "").to_i
     @payment = ""
     cc = CreditCard.new(@credit_card_num, @exp_year, @exp_month)
+    if cc.expired? && (!cc.valid?)
+      flash[:notice] = "Credit card and expiration date are invalid."
+      redirect_to carts_path()
+      return
+    end
     if cc.expired?
       flash[:notice] = "Credit card is expired."
       redirect_to carts_path()
+      return
     end
-    if ! cc.valid?
+    if !cc.valid?
       flash[:notice] = "Credit card is not valid. Please use AMEX, DCCB, DISC, MC, or VISA"
       redirect_to carts_path()
+      return
     end
-    for reg in get_array_of_ids_for_generating_registrations
-      r = Registration.new
-      r.payment = cc
-      r.camp_id = reg[0]
-      r.student_id = reg[1]
-      #@payment += r.pay
-      r.save
+    if cc.valid? && ! cc.expired?
+      for reg in get_array_of_ids_for_generating_registrations
+        r = Registration.new
+        r.payment = cc
+        r.camp_id = reg[0]
+        r.student_id = reg[1]
+        #@payment += r.pay
+        r.save
+      end
+      clear_cart
+      flash[:notice] = "Thank you for your purchase!"
+      # redirect_to family_path(current_user.family.id)
     end
-    clear_cart
-    flash[:notice] = "Thank you for your purchase!"
-    # redirect_to family_path(current_user.family.id)
   end
  
 end

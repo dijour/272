@@ -1,87 +1,91 @@
-<!DOCTYPE html>
 <html>
-<head>
+<!--<head>-->
     
-    <title>Card &ndash; the better way to collect credit cards</title>
-    <meta name="viewport" content="initial-scale=1">
+    <!--<title>Card &ndash; the better way to collect credit cards</title>-->
+    <!--<meta name="viewport" content="initial-scale=1">-->
     <!-- CSS is included through the card.js script -->
-</head>
+<!--</head>-->
 <body>
-    <% if @cart.empty? %>
-      <h4 align="center">There are no items in your cart at this time.</h4>
-    <% else %>
-      <h3>Cart</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Student</th>
-          <th>Camp</th>
-          <th>Start Date</th>
-          <th>Cost</th>
-          <th class="align_center">Options</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-    
-      <tbody>
-        <% session[:cart].each do |ci| %>
-          <tr>
-            <td><%= ci["student_name"] %></td>
-            <td><%= ci["camp_name"] %></td>
-            <td><%= ci["date"].to_date.strftime("%m/%d/%y") %></td>
-            <td><%= number_to_currency(ci["cost"]) %></td>
-            <td><a data-method="delete" href="<%= delete_from_cart_path(ci["ids"][0], ci["ids"][1]) %>" rel="nofollow">Delete</a></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <% end %>
-    
-    <% if ! @cart.empty? %>
-        <h3 align="center"><%= "Total: #{number_to_currency(@total_price)}" %></h3>
-    
-        <section class="hero is-info welcome is-small" style="background:#48f23c">
-            <div class="container-large">
-              <h1 class="title center">
-                <%= "Total: #{number_to_currency(@total_price)}"  %>
-              </h1>
-            </div>
-        </section>
-    
-        <h1 align="center"> Checkout </h1>
-    
-    <style>
-        .demo-container {
-            width: 100%;
-            max-width: 350px;
-            margin: 50px auto;
-        }
-        form {
-            margin: 30px;
-        }
-        input {
-            width: 200px;
-            margin: 10px auto;
-            display: block;
-        }
-    </style>
-    <div class="demo-container">
-        <div class="card-wrapper"></div>
-
-        <div class="form-container active">
-            <form action="/carts/checkout" method="POST">
-                <input id="cc" placeholder="Card number" type="tel" name="number">
-                <input placeholder="Full name" type="text" name="name">
-                <input id="exp" placeholder="MM/YYYY" type="tel" name="expiry">
-                <input placeholder="CVC" type="number" name="cvc">
-                <input type="submit">
-            </form>
+  <% if @cart.empty? %>
+    <section class="hero is-info welcome is-small" style="background:#64ffda">
+        <div class="container-large">
+          <h1 class="title center">
+            <%= "Your cart is empty."  %>
+          </h1>
         </div>
-    </div>
-    
+    </section>  
+  <% end %>
 
-    
-    <!--id is credit_card_credit_card_num etc.-->
+<% if ! @cart.empty? %>
+  <div class="row">
+    <div class="col s6">
+      <div class="card blue darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Cart</span>
+          
+            <table>
+              <thead>
+                <tr>
+                  <th>Student</th>
+                  <th>Camp</th>
+                  <th>Start Date</th>
+                  <th>Cost</th>
+                  <th class="align_center">Options</th>
+                  <th colspan="3"></th>
+                </tr>
+              </thead>
+            
+              <tbody>
+                <% session[:cart].each do |ci| %>
+                  <tr>
+                    <td><%= ci["student_name"] %></td>
+                    <td><%= ci["camp_name"] %></td>
+                    <td><%= ci["date"].to_date.strftime("%m/%d/%y") %></td>
+                    <td><%= number_to_currency(ci["cost"]) %></td>
+                    <td><a data-method="delete" href="<%= delete_from_cart_path(ci["ids"][0], ci["ids"][1]) %>" rel="nofollow">Delete</a></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+
+
+            
+        </div>
+      </div>
+      
+      <section class="hero is-info welcome is-small" style="background:#64ffda">
+        <div class="container-large">
+          <h1 class="title center">
+            <%= "Total: #{number_to_currency(@total_price)}"  %>
+          </h1>
+        </div>
+      </section>
+      
+    </div>
+
+    <div class="col s6">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Payment</span>
+            
+            <div class="demo-container">
+                <div class="card-wrapper"></div>
+                <div class="form-container active">
+                    <form action="/carts/checkout" method="POST">
+                        <input id="cc" placeholder="Card number" type="tel" name="number">
+                        <input placeholder="Full name" type="text" name="name">
+                        <input id="exp" placeholder="MM/YYYY" type="tel" name="expiry">
+                        <input placeholder="CVC" type="number" name="cvc">
+                        <input type="submit">
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
         
     <script>
         new Card({
@@ -89,6 +93,25 @@
             container: '.card-wrapper'
         });
     </script>
+    
 </body>
-<% end %>
+
 </html>
+
+
+<style>
+input[type=submit] {
+    border-radius: 5px;
+    border: 0;
+    width: 250px;
+    height:100px;
+    font-family: Montserrat;
+    color: white;
+    font-size: 45px;
+    background: #64ffda;
+      /*background: -webkit-linear-gradient(45deg, #b3e5fc 0%, #64ffda 100%);*/
+      /*background: linear-gradient(45deg, #b3e5fc 0%, #64ffda 100%);*/
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f4f4f4', endColorstr='#ededed', GradientType=0);
+    /* IE6-9 */
+}
+</style>

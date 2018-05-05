@@ -15,6 +15,7 @@ class InstructorsController < ApplicationController
   end
 
   def edit
+    authorize! :update, @instructor
   end
 
   def new

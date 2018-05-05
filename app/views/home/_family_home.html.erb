@@ -1,4 +1,4 @@
-<section class="hero is-info welcome is-small" style="background:#48f23c">
+<section class="hero is-info welcome is-small" style="background:#64ffda">
     <div class="container-large">
       <h1 class="title center">
         <%= "Hello, #{current_user.family.parent_first_name}" %>
@@ -23,7 +23,7 @@
     <div class="card blue-grey darken-1">
       <div class="card-content white-text">
         <span class="card-title">Upcoming Camps</span>
-         <%= pie_chart current_user.family.students.group(:first_name, :last_name).registrations.count, donut: true, messages: {empty: "No data"} %>
+         <%= pie_chart current_user.family.students.group(:registrations, :first_name, :last_name).count, donut: true, messages: {empty: "No data"} %>
       </div>
       <div class="card-action">
         <%= link_to 'Manage Students', students_path, :class=>"btn waves-effect waves-light gradient-45deg-red-pink mt-2 btn-small z-depth-5" %>

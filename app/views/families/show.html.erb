@@ -11,13 +11,6 @@
 <div class="row">
   <div class="col s12">
     <%= render :partial => "partials/object_options", locals: {model_name: "family", object: @family} %>
-    <% if can? :edit, Family %>
-        <%= link_to(eval("edit_family_password_path(@family)"), class: 'waves-effect waves-light btn') do %>
-            &nbsp;<%= "Edit Password" %>
-            <%= render :partial => "password_form", locals: {model_name: "family", object: @family} %>
-        <% end %>
-        &nbsp;&nbsp;
-    <% end %>
   </div>
 </div>
 

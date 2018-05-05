@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new', :as => :login
   get 'logout' => 'sessions#destroy', :as => :logout
 
+  # routes for managing passwords
   get 'instructors/:id/change_pass' => 'instructors#change_pass', :as => :edit_instructor_password
   get 'families/:id/change_pass' => 'families#change_pass', :as => :edit_family_password
 
@@ -39,9 +40,6 @@ Rails.application.routes.draw do
   delete 'camps/:id/students/:student_id', to: 'registrations#destroy', as: :remove_registration
   
   # Routes for managing carts
-  
-  # delete 'carts/', to: 'carts#destroy', as: :remove_cart_item
   delete "carts/delete_from_cart/:camp_id/:student_id" => "carts#delete_from_cart", as: :delete_from_cart
-  # post "carts/checkout/:credit_card_num/:expiration_year/:expiration_month" => "carts#checkout", as: :checkout
   post "carts/checkout", to: "carts#checkout", as: :checkout
 end

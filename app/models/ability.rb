@@ -48,9 +48,10 @@ class Ability
       
       can :read, Location
       
-      can :update, Instructor do |instr|
+      can :manage, Instructor do |instr|
         user.instructor.id == instr.id
       end
+      
       
       can :show, Instructor do |instr|
         instr.id == user.instructor.id

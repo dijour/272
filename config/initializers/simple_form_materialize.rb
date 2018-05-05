@@ -6,7 +6,7 @@ SimpleForm.setup do |config|
   config.boolean_style = :inline
   config.item_wrapper_tag = :p
 
-  config.wrappers :materialize_form, tag: 'div', class: 'input-field col s7', error_class: 'has-error' do |b|
+  config.wrappers :materialize_form, tag: 'div', class: 'input-field col', error_class: 'has-error' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
@@ -32,7 +32,7 @@ SimpleForm.setup do |config|
     b.use :hint,  wrap_with: { tag: 'span', class: 'help-block' }
   end
 
-  config.wrappers :materialize_boolean, tag: 'p', class: 'col s7', error_class: 'has-error' do |b|
+  config.wrappers :materialize_boolean, tag: 'p', class: 'col', error_class: 'has-error' do |b|
     b.use :html5
     b.optional :readonly
 
@@ -56,7 +56,7 @@ SimpleForm.setup do |config|
     b.use :hint,  wrap_with: { tag: 'span', class: 'help-block' }
   end
 
-  config.wrappers :materialize_radio_and_checkboxes, tag: 'div', class: 'col s7', error_class: 'has-error' do |b|
+  config.wrappers :materialize_radio_and_checkboxes, tag: 'div', class: 'col', error_class: 'has-error' do |b|
     b.use :html5
     b.optional :readonly
     b.use :label
