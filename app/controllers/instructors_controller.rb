@@ -54,6 +54,7 @@ class InstructorsController < ApplicationController
   end
 
   def change_pass
+    @instructor = Instructor.find(params[:id]) 
   end
 
   private

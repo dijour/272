@@ -43,7 +43,7 @@ class RegistrationsController < ApplicationController
 
   private
     def registration_params
-      params.require(:registration).permit(:camp_id, :student_id, :payment)
+      params.require(:registration).permit(:camp_id, :student_id, :credit_card_number, :expiration_month, :expiration_year, :payment)
     end
 
 end

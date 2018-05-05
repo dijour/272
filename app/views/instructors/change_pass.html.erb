@@ -1,3 +1,5 @@
-<%= render partial: "partials/form2_structure", locals: {object: @instructor, 
-                                                        type_of_form: "Edit Password",
-                                                        fields1: "password_form" } %>
+<h1>Editing Instructor Password</h1>
+
+<%= render 'password_form', instructor: @instructor %>
+
+<%= link_to 'Back', @instructor %>

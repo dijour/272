@@ -7,9 +7,6 @@
     <!-- CSS is included through the card.js script -->
 </head>
 <body>
-    
-    <% @credit_card_num = 0, @expiration_month = 0, @expiration_year = 0 %>
-    
     <% if @cart.empty? %>
       <h4 align="center">There are no items in your cart at this time.</h4>
     <% else %>
@@ -43,9 +40,15 @@
     <% if ! @cart.empty? %>
         <h3 align="center"><%= "Total: #{number_to_currency(@total_price)}" %></h3>
     
-        <h1> Checkout </h1>
-        
+        <section class="hero is-info welcome is-small" style="background:#48f23c">
+            <div class="container-large">
+              <h1 class="title center">
+                <%= "Total: #{number_to_currency(@total_price)}"  %>
+              </h1>
+            </div>
+        </section>
     
+        <h1 align="center"> Checkout </h1>
     
     <style>
         .demo-container {
@@ -66,33 +69,26 @@
         <div class="card-wrapper"></div>
 
         <div class="form-container active">
-            <form action="">
-                
-                <input placeholder="Card number" type="tel" name="number">
+            <form action="/carts/checkout" method="POST">
+                <input id="cc" placeholder="Card number" type="tel" name="number">
                 <input placeholder="Full name" type="text" name="name">
-                <input placeholder="MM/YY" type="tel" name="expiry">
+                <input id="exp" placeholder="MM/YYYY" type="tel" name="expiry">
                 <input placeholder="CVC" type="number" name="cvc">
+                <input type="submit">
             </form>
         </div>
     </div>
+    
 
+    
+    <!--id is credit_card_credit_card_num etc.-->
+        
     <script>
         new Card({
             form: document.querySelector('form'),
             container: '.card-wrapper'
         });
     </script>
-    
-    
-    <%= f.input :credit_card_num, label_html: { class: 'active' } %>
-    <%= f.input :expiration_month, label_html: { class: 'active' } %>
-    <%= f.input :expiration_year, label_html: { class: 'active' } %>
-    
-    <a data-method="post" href="<%= checkout_path(@credit_card_num, @expiration_year, @expiration_month) %>" rel="nofollow">Checkout</a>
-    
 </body>
 <% end %>
-
-
-
 </html>

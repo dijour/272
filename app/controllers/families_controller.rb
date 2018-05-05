@@ -62,6 +62,10 @@ class FamiliesController < ApplicationController
     @family.destroy
     redirect_to families_url, notice: "The #{@family.family_name} family was deleted from the system."
   end
+  
+  def change_pass
+    @family = Family.find(params[:id]) 
+  end
 
   private
     def set_family

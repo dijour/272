@@ -1,6 +1,9 @@
 class CartsController < ApplicationController
   include AppHelpers::Cart
   
+  skip_before_action :verify_authenticity_token  
+
+  
   #authorize_resource  
   
   def index
@@ -39,9 +42,10 @@ class CartsController < ApplicationController
   end
  
   def checkout
-    @credit_card_num = params[:credit_card_num]
-    @exp_year = params[:expiration_year]
-    @exp_month = params[:expiration_month]
+    # byebug
+    @credit_card_num = params[:number].to_i
+    @exp_year = params[:expiry].chomp(" ").split("/")[1].gsub(/\s+/, "").to_i
+    @exp_month = params[:expiry].chomp(" ").split("/")[0].gsub(/\s+/, "").to_i
     @payment = ""
     cc = CreditCard.new(@credit_card_num, @exp_year, @exp_month)
     if cc.expired?
@@ -52,15 +56,17 @@ class CartsController < ApplicationController
       flash[:notice] = "Credit card is not valid. Please use AMEX, DCCB, DISC, MC, or VISA"
       redirect_to carts_path()
     end
-    for reg in @ids
+    for reg in get_array_of_ids_for_generating_registrations
       r = Registration.new
       r.payment = cc
-      r.camp = reg[0]
-      r.student = reg[1]
-      @payment += r.pay
+      r.camp_id = reg[0]
+      r.student_id = reg[1]
+      #@payment += r.pay
       r.save
     end
     clear_cart
+    flash[:notice] = "Thank you for your purchase!"
+    # redirect_to family_path(current_user.family.id)
   end
  
 end

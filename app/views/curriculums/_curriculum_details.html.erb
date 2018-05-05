@@ -12,7 +12,7 @@
 <p>
   <strong>Description:</strong>
   <% if ! current_user.nil? and current_user.role == "admin" %>
-    <%= best_in_place @curriculum, :description, as: :input %>
+    <%= best_in_place @curriculum, :description, as: :textarea %>
   <% else %>
     <%= @curriculum.description %>
   <% end %>
