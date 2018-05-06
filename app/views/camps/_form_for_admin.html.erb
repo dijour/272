@@ -11,7 +11,7 @@
                 </div>
             </section>
         <% else %>
-          <%= f.input :student_id, collection: current_user.family.students.at_or_above_rating(@camp.curriculum.min_rating).below_rating(@camp.curriculum.max_rating).alphabetical.to_a, include_blank: true %>
+          <%= f.input :student_id, collection: Student.active.at_or_above_rating(@camp.curriculum.min_rating).below_rating(@camp.curriculum.max_rating).alphabetical.to_a, include_blank: true %>
         <% end %>  
       
       <%= f.input :camp_id, as: :hidden, input_html: { value: @camp.id } %>
