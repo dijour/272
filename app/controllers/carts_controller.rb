@@ -73,7 +73,7 @@ class CartsController < ApplicationController
       end
       clear_cart
       flash[:notice] = "Thank you for your purchase!"
-      # redirect_to family_path(current_user.family.id)
+      redirect_to carts_path()
     end
   end
  

@@ -7,12 +7,11 @@
         <tr>
           <th>Name</th>
           <th>Rating</th>
-          <th>Points Earned</th>
         </tr>
       </thead>
 
       <tbody>
-         <% @registrations.each do |r| %>
+         <% @registrations.alphabetical.each do |r| %>
           <tr>
             <% if can? :read, r.student %>
                 <td><%= link_to r.student.proper_name, student_path(r.student) %></td>
@@ -20,7 +19,6 @@
             <td><%= r.student.proper_name %></td>
             <% end %>
             <td><%= r.student.rating %></td>
-            <td><%= r.points_earned %></td>
           </tr>
         <% end %>
       </tbody>

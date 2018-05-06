@@ -1,0 +1,27 @@
+<%= simple_form_for(@registration) do |f| %>
+  <%= f.error_notification %>
+  <div class="row">
+    <div class="form-inputs">
+        <% if Student.active.at_or_above_rating(@camp.curriculum.min_rating).below_rating(@camp.curriculum.max_rating).alphabetical.size == 0 %>
+            <section class="hero is-info welcome is-small" style="background:#f48fb1">
+                <div class="container-large">
+                  <h5 class="title center">
+                    <%= "No eligible students" %>
+                  </h5>
+                </div>
+            </section>
+        <% else %>
+          <%= f.input :student_id, collection: current_user.family.students.at_or_above_rating(@camp.curriculum.min_rating).below_rating(@camp.curriculum.max_rating).alphabetical.to_a, include_blank: true %>
+        <% end %>  
+      
+      <%= f.input :camp_id, as: :hidden, input_html: { value: @camp.id } %>
+    </div>
+  </div>
+  <div class="row">
+    <% if Student.active.at_or_above_rating(@camp.curriculum.min_rating).below_rating(@camp.curriculum.max_rating).alphabetical.size > 0 %>
+        <div class="form-actions col s8">
+          <%= f.button :submit %>
+        </div>
+    <% end %>
+  </div>
+<% end %>

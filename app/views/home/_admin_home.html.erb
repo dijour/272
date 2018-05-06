@@ -59,6 +59,7 @@
         <thead>
           <tr>
             <th>Name</th>
+            <th>Start Date</th>
             <th>Cost</th>
             <th>Max Capacity</th>
             <th>Enrolled Students</th>
@@ -68,10 +69,11 @@
         </thead>
       
         <tbody>
-          <% for camp in Camp.all do %>
+          <% for camp in Camp.alphabetical do %>
               <% if camp.start_date <= Date.today && camp.end_date >= Date.today %>
                 <tr>
                   <td><%= link_to camp.name, camp, {:style=>'color:blue;'}%></td>
+                  <td><%= camp.start_date.strftime("%m/%d/%y") %></td>
                   <td><%= number_to_currency(camp.cost) %></td>
                   <td><%= camp.max_students %></td>
                   <td><%= camp.registrations.size %></td>

@@ -7,30 +7,20 @@
   <div class="row">
     <div class="col">
       <h5>New Student:</h5>
-      <%= simple_form_for(@registration, url: '/camps/' + @camp.id.to_s + '/students/add', :method => :get ) do |f| %>
-        <%= f.error_notification %>
-        <div class="row">
-          <div class="form-inputs">
-            <% if current_user.role == "admin" %>
-              <%= f.input :student_id, collection: Student.active.at_or_above_rating(@camp.curriculum.min_rating).below_rating(@camp.curriculum.max_rating).alphabetical.to_a, include_blank: true %>
-            <% end %>
-            <% if current_user.role == "parent" %>
-              <%= f.input :student_id, collection: current_user.family.students.at_or_above_rating(@camp.curriculum.min_rating).below_rating(@camp.curriculum.max_rating).alphabetical.to_a, include_blank: true %>
-            <% end %>
-            <%= f.input :camp_id, as: :hidden, input_html: { value: @camp.id } %>
-            <%= f.input :id, as: :hidden, input_html: { value: @camp.id } %>
-
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-actions col s8">
-            <%= f.button :submit, :url => add_to_cart_path, :method => :get  %>
-          </div>
-        </div>
+      
+      <% if current_user.role == "parent" %>
+        <%= render partial: "form_for_parent" %>
       <% end %>
+      
+      <% if current_user.role == "admin" %>
+        <%= render partial: "form_for_admin" %>
+      <% end %>
+      
+      
+      
+        
     </div>
   </div>
 
 
 </div>
-

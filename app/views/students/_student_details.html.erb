@@ -3,7 +3,7 @@
 <h5>Student Information</h5>
 <p><strong>First Name: </strong><%= @student.first_name %></p>
 <p><strong>Last Name: </strong><%= @student.last_name %></p>
-<p><strong>Parent Emergency Contact: </strong><%= @student.family.phone %></p>
+<p><strong>Parent Emergency Contact: </strong><%= number_to_phone @student.family.phone %></p>
 <p><strong>Parent Email: </strong><%= @student.family.email %></p>
 <p><strong>Active:</strong>
   <%= @student.active ? "Yes" : "No" %>

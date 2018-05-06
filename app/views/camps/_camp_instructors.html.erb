@@ -1,3 +1,4 @@
+<div class="col s12">
 <div class="card indigo lighten-2">
   <div class="card-content white-text">
     <span class="card-title">Camp Instructors</span>
@@ -5,21 +6,12 @@
 		<p>No instructors at this time</p>
 	  <% else %>
       <ul>
-        <% @instructors.each do |i| %>
+        <% @instructors.alphabetical.each do |i| %>
           <li>
-            <% if can? :destroy, Instructor %>
-              <%= link_to(camp_instructor_path(id: camp_instructor_id_for(@camp, i)), method: :delete, class: 'remove') do %>
-              x&nbsp;&nbsp;
-              <% end %>
-            <% end %>
             <%= link_to i.proper_name, instructor_path(i) %>
           </li>
         <% end %>
       </ul>
-    <% end %>
-    <% if can? :create, Instructor %>
-    <div class="card-action">
-      <%= link_to "Add a new instructor", new_camp_instructor_path(camp_id: @camp.id) %>
     <% end %>
     </div>
   </div>
