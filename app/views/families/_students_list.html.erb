@@ -27,7 +27,7 @@
     <% end %>
     <% if can? :create, Student %>
       <div class="card-action" style="red">
-        <%= link_to "Add a new student", new_student_path() %>
+        <%= link_to "Add a new student", new_student_path(), :class => "btn waves-effect waves-light gradient-45deg-red-pink mt-2 btn-small z-depth-2" %>
     <% end %>
 
   </div>

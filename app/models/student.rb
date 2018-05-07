@@ -41,13 +41,25 @@ class Student < ApplicationRecord
   # other methods
   
   def self.not_for_camp(camp)
-    # the 'instructive way'... (which I told you if you asked me for help)
     studs = Set.new
     for stud in Student.active.alphabetical
       studs << stud 
     end
     for reg in Registration.for_camp(camp)
       studs.delete(reg.student)
+    end
+    return studs
+  end
+  
+  def self.not_for_date(start_date, timeslot)
+    studs = Set.new
+    for stud in Student.active.alphabetical
+      studs << stud 
+    end
+    for reg in Registration.all
+      if reg.camp.start_date == start_date && reg.camp.time_slot == timeslot
+        studs.delete(reg.student)
+      end
     end
     return studs
   end

@@ -53,11 +53,12 @@ class CartsController < ApplicationController
     if cc.valid? && ! cc.expired?
       for reg in get_array_of_ids_for_generating_registrations
         r = Registration.new
-        r.payment = cc
         r.camp_id = reg[0]
         r.student_id = reg[1]
-        #@payment += r.pay
-        r.save
+        r.credit_card_number= @credit_card_num
+        r.expiration_year = @exp_year
+        r.expiration_month = @exp_month
+        r.pay
       end
       clear_cart
       flash[:notice] = "Thank you for your purchase!"
