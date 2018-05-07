@@ -22,19 +22,19 @@
         <td><%= number_to_phone family.phone %></td>
         <td><%= family.students.size %></td>
         <% if can? :update, Family %>
-          <td><%= link_to 'Edit', edit_family_path(family), :class=>"btn waves-effect waves-light gradient-45deg-red-pink mt-2 btn-small z-depth-5" %></td>
+          <td><%= link_to 'Edit', edit_family_path(family), :class=>"btn waves-effect waves-light gradient-45deg-red-pink mt-2 btn-small z-depth-2" %></td>
         <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<span class="paginate">
+<h5 class="paginate">
   <%= will_paginate @families, :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next", :param_name => 'families' %>
-</span>
+</h5>
 
     <% end %>
 
 <% if can? :create, Family %>
-  <td><%= link_to 'New family', new_family_path, :class=>"btn waves-effect waves-light gradient-45deg-red-pink mt-2 btn-small z-depth-5" %></td>
+  <td><%= link_to 'New family', new_family_path, :class=>"btn waves-effect waves-light gradient-45deg-red-pink mt-2 btn-small z-depth-2" %></td>
 <% end %>

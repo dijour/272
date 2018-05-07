@@ -57,16 +57,6 @@ class Ability
         instr.id == user.instructor.id
       end
       
-      # can :index, Instructor do |instr|
-      #   instructlist = Set.new
-      #   for camp in user.instructor.camps
-      #     for struct in camp.instructors
-      #       instructlist << struct
-      #     end
-      #   end
-      #   instructlist.include? instr.id
-      # end
-      
       can :update, User do |uzer|  
         user.id == uzer.id
       end
@@ -96,6 +86,7 @@ class Ability
 
       
     elsif user.role? :parent
+      
       can :manage, Student do |student|
         user.family.students.include? student
       end
@@ -105,9 +96,14 @@ class Ability
       can :update, Family do |family|  
         family.id == user.family.id
       end
-      can :update, User do |uzr|  
-        uzr.id == user.id
+      # can :update, User do |uzr|  
+      #   uzr.id == user.id
+      # end
+
+      can :update, User do |uzer|  
+        user.id == uzer.id
       end
+      
       can :show, Family do |family|
         family.id == user.family.id
       end
@@ -118,6 +114,10 @@ class Ability
         user.family.students.include? registration.student
       end
 
+      can :delete, Registration do |registration|
+        user.family.students.include? registration.student
+      end
+    
       
     else
       can :create, User

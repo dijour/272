@@ -6,7 +6,7 @@ class StudentsController < ApplicationController
 
   def index
     authorize! :index, @students
-    @students = Student.all.alphabetical.paginate(:page => params[:page]).per_page(12)
+    @students = Student.all.alphabetical.paginate(:page => params[:students]).per_page(12)
   end
 
   def show

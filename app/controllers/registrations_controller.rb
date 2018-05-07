@@ -2,8 +2,6 @@ class RegistrationsController < ApplicationController
   include AppHelpers::Cart
   
   authorize_resource  
-
-  ## NEED HELP GETTING CART TO SHOW SHIT
   
   def new
     @registration   = Registration.new
@@ -23,14 +21,6 @@ class RegistrationsController < ApplicationController
     end
   end
  
-  # def destroy
-  #   @registration = Registration.find(params[:id])
-  #   @registration.destroy
-  #   flash[:notice] = "Successfully removed this instructor."
-  #   redirect_to camp_path(@registration.camp)
-  # end
-
-
   def destroy
     camp_id = params[:id]
     student_id = params[:student_id]

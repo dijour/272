@@ -12,18 +12,6 @@ class CartsController < ApplicationController
     @ids = get_array_of_ids_for_generating_registrations
   end
   
-  def create
-    @camp_instructor = CampInstructor.new(camp_instructor_params)
-    if @camp_instructor.save
-      flash[:notice] = "Successfully added instructor."
-      redirect_to camp_path(@camp_instructor.camp)
-    else
-      @camp = Camp.find(params[:camp_instructor][:camp_id])
-      @other_instructors = @camp.instructors
-      render action: 'new', locals: { camp: @camp, other_instructors: @other_instructors }
-    end
-  end
- 
   def add_to_cart
     # @registration = Registration.new(registration_params)
     @camp = Camp.find(params[:registration][:camp_id])

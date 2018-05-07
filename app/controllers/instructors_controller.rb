@@ -40,12 +40,16 @@ class InstructorsController < ApplicationController
       end      
     end
   end
-
+  
   def update
-    if @instructor.update(instructor_params)
-      redirect_to instructor_path(@instructor), notice: "#{@instructor.first_name} #{@instructor.last_name} was revised in the system."
-    else
-      render action: 'edit'
+    respond_to do |format|
+      if @instructor.update_attributes(instructor_params)
+        format.html { redirect_to(@instructor, :notice => "Successfully updated #{@instructor.proper_name}.") }
+        format.json { respond_with_bip(@instructor) }
+      else
+        format.html { render :action => "edit" }
+        format.json { respond_with_bip(@instructor) }
+      end
     end
   end
 

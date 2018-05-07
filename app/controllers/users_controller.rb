@@ -15,6 +15,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    authorize! :updet, @user
     @user = :current_user
   end
 

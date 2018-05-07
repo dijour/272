@@ -39,6 +39,19 @@ class Student < ApplicationRecord
   after_rollback :convert_to_inactive_and_remove_registrations
 
   # other methods
+  
+  def self.not_for_camp(camp)
+    # the 'instructive way'... (which I told you if you asked me for help)
+    studs = Set.new
+    for stud in Student.active.alphabetical
+      studs << stud 
+    end
+    for reg in Registration.for_camp(camp)
+      studs.delete(reg.student)
+    end
+    return studs
+  end
+  
   def name
     "#{self.last_name}, #{self.first_name}"
   end

@@ -27,20 +27,20 @@
         <td><%= user.email %></td>
         <td><%= number_to_phone user.phone %></td>
         <% if can? :update, User %>
-          <td><%= link_to 'Edit', edit_user_path(user), :class=>"btn waves-effect waves-light gradient-45deg-red-pink mt-2 btn-small z-depth-5" %></td>
+          <td><%= link_to 'Edit', edit_user_path(user), :class=>"btn waves-effect waves-light gradient-45deg-red-pink mt-2 btn-small z-depth-2" %></td>
         <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<span class="paginate">
+<h5 class="paginate">
   <%= will_paginate @users, :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next", :param_name => 'users' %>
-</span>
+</h5>
 
     <% end %>
 
 <% if can? :create, User %>
-  <td><%= link_to 'New User', new_user_path, :class=>"btn waves-effect waves-light gradient-45deg-red-pink mt-2 btn-small z-depth-5" %></td>
+  <td><%= link_to 'New User', new_user_path, :class=>"btn waves-effect waves-light gradient-45deg-red-pink mt-2 btn-small z-depth-2" %></td>
 <% end %>
 

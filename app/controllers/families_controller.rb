@@ -8,7 +8,7 @@ class FamiliesController < ApplicationController
 
   def index
     authorize! :index, @families
-    @families = Family.all.alphabetical.paginate(:page => params[:page]).per_page(12)
+    @families = Family.all.alphabetical.paginate(:page => params[:families]).per_page(12)
   end
 
   def show
@@ -49,12 +49,16 @@ class FamiliesController < ApplicationController
       end      
     end
   end
-
+  
   def update
-    if @family.update(family_params)
-      redirect_to family_path(@family), notice: "The #{@family.family_name} family was revised in the system."
-    else
-      render action: 'edit'
+    respond_to do |format|
+      if @family.update_attributes(family_params)
+        format.html { redirect_to(@family, :notice => "Successfully updated #{@famiy.name}.") }
+        format.json { respond_with_bip(@family) }
+      else
+        format.html { render :action => "edit" }
+        format.json { respond_with_bip(@family) }
+      end
     end
   end
 
@@ -64,6 +68,7 @@ class FamiliesController < ApplicationController
   end
   
   def change_pass
+    authorize! :update, @family
     @family = Family.find(params[:id]) 
   end
 

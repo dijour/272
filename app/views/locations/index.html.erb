@@ -9,4 +9,6 @@
 <% end %>
 
 
-<%= link_to 'New Location', new_location_path, :class => "btn waves-effect waves-light gradient-45deg-red-pink mt-2 btn-small z-depth-5" %>
+<% if can? :create, Location %>
+  <%= link_to 'New Location', new_location_path, :class => "btn waves-effect waves-light gradient-45deg-red-pink mt-2 btn-small z-depth-2" %>
+<% end %>
