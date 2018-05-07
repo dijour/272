@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    authorize! :update, @user
+    authorize! :edit, @user
     @user = :current_user
   end
 
@@ -35,8 +35,16 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    if @user.update_attributes(current_user)
-      redirect_to(@user, :notice => 'User was successfully updated.')
+    if @user.update_attributes(user_params)
+      if @user.role == "instructor"
+        redirect_to(@user.instructor, :notice => 'User was successfully updated.')
+      end
+      if @user.role == "parent"
+        redirect_to(@user.family , :notice => "User was successfully updated" )
+      end
+      if @user.role == "admin"
+        redirect_to(home_path , :notice => "User was successfully updated" )
+      end
     else
       render :action => "edit"
     end

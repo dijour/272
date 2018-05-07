@@ -17,7 +17,7 @@ class FamiliesController < ApplicationController
   end
 
   def edit
-    authorize! :update, @family
+    authorize! :edit, @family
   end
 
   def new
@@ -54,7 +54,7 @@ class FamiliesController < ApplicationController
   def update
     respond_to do |format|
       if @family.update_attributes(family_params)
-        format.html { redirect_to(@family, :notice => "Successfully updated #{@famiy.name}.") }
+        format.html { redirect_to(@family, :notice => "Successfully updated #{@family.family_name}.") }
         format.json { respond_with_bip(@family) }
       else
         format.html { render :action => "edit" }
@@ -69,7 +69,7 @@ class FamiliesController < ApplicationController
   end
   
   def change_pass
-    authorize! :update, @family
+    # authorize! :update, @family
     @family = Family.find(params[:id]) 
   end
   

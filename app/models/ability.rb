@@ -86,23 +86,27 @@ class Ability
 
       
     elsif user.role? :parent
-      
       can :manage, Student do |student|
         user.family.students.include? student
       end
       can :update, Student do |student|
         user.family.students.include? student
       end
-      can :update, Family do |family|  
+      can :manage, Family do |family|  
         family.id == user.family.id
       end
-      # can :update, User do |uzr|  
-      #   uzr.id == user.id
-      # end
-
-      can :update, User do |uzer|  
-        user.id == uzer.id
+      
+      can :manage, User do |uzr|  
+        uzr.id == user.id
       end
+      
+      can :change_pass, User do |uzr|
+        uzr.id == user.id
+      end
+
+      # can :update, User do |uzer|  
+      #   user.id == uzer.id
+      # end
       
       can :show, Family do |family|
         family.id == user.family.id

@@ -12,8 +12,7 @@
       </br>
       <% if (current_user.role?(:admin) || current_user.role?(:instructor)) %>
         <div class="field">
-          <%= f.label :photo %><br />
-          <%= f.file_field :photo,  required: true, multiple: true, name: 'picture' %>
+          <%= f.input :photo, as: :file  %>
         </div>
       <% end %>
     </div>
