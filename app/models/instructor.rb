@@ -41,6 +41,19 @@ class Instructor < ApplicationRecord
   end
   
   
+  def self.not_for_date(start_date, timeslot)
+    structs = Set.new
+    for stud in Instructor.active.alphabetical
+      structs << stud 
+    end
+    for ci in CampInstructor.all
+      if ci.camp.start_date == start_date && ci.camp.time_slot == timeslot
+        structs.delete(ci.instructor)
+      end
+    end
+    return structs
+  end
+  
 
   # delegates
   delegate :email, to: :user, allow_nil: true

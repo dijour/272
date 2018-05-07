@@ -17,6 +17,7 @@ class FamiliesController < ApplicationController
   end
 
   def edit
+    authorize! :update, @family
   end
 
   def new

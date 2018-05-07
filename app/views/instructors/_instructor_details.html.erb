@@ -2,7 +2,7 @@
 
 <h5>Basic Information</h5>
 <% unless @instructor.photo_url.nil? %>
-<p><%= image_tag @instructor.photo_url %></p>
+<p><%= image_tag @instructor.photo_url, :style => "width:250px;height:250px;border:0;" %></p>
 <% end %>
 
 <p>

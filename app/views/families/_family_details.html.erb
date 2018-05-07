@@ -1,8 +1,14 @@
 <h3><%= @family.family_name %></h3>
-
 <h5>Basic Information</h5>
 <p><strong>Parent First Name: </strong><%= @family.parent_first_name %></p>
-<p><strong>Parent Phone: </strong><%= number_to_phone @family.phone %></p>
+<p>
+  <strong>Parent Phone:</strong>
+  <% if ! current_user.nil? and (current_user.role == "admin" || current_user.role == "parent") %>
+    <%= best_in_place @family, :phone, as: :input %>
+  <% else %>
+    <%= @family.phone %>
+  <% end %>
+</p>
 <p>
   <strong>Parent Email:</strong>
   <% if ! current_user.nil? and (current_user.role == "admin" || current_user.role == "parent") %>
@@ -11,8 +17,6 @@
     <%= @family.email %>
   <% end %>
 </p>
-
-
 <p><strong>Active:</strong>
   <%= @family.active ? "Yes" : "No" %>
 </p>

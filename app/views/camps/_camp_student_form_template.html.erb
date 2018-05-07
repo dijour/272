@@ -5,7 +5,7 @@
   <% @student = nil %> 
   <div class="row">
     <div class="col">
-      <h5>New Student:</h5>
+      <h5>Add Student:</h5>
       
       <% if current_user.role == "parent" %>
         <%= render partial: "form_for_parent" %>
