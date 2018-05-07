@@ -43,4 +43,6 @@ Rails.application.routes.draw do
   # Routes for managing carts
   delete "carts/delete_from_cart/:camp_id/:student_id" => "carts#delete_from_cart", as: :delete_from_cart
   post "carts/checkout", to: "carts#checkout", as: :checkout
+  
+
 end

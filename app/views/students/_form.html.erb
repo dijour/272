@@ -4,7 +4,12 @@
     <div class="form-inputs">
       <%= f.input :first_name, label_html: { class: 'active' } %>
       <%= f.input :last_name, label_html: { class: 'active' } %>
-      <%= f.input :family_id, collection: Family.active.alphabetical.to_a, include_blank: true %>
+      <% if current_user.role == "admin" %>
+        <%= f.input :family_id, collection: Family.active.alphabetical.to_a.map{|f| f.family_name}, include_blank: true %>
+      <% end %>
+      <% if current_user.role == "parent" %>
+        <%= f.input :family_id, :as => :hidden, :input_html => { :value => current_user.family.id }%>
+      <% end %>
       <%= f.input :date_of_birth, label_html: { class: 'active' } %>
       <%= f.input :rating, label_html: { class: 'active' }, allow_blank: true %>
       <%= f.input :active %>

@@ -71,6 +71,7 @@ class FamiliesController < ApplicationController
     authorize! :update, @family
     @family = Family.find(params[:id]) 
   end
+  
 
   private
     def set_family
