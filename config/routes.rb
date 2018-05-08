@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  
+  get 'errors/not_found'
+
+  get 'errors/internal_server_error'
+
   # Semi-static page routes
   get 'home', to: 'home#index', as: :home
   get 'home/about', to: 'home#about', as: :about
@@ -44,5 +49,8 @@ Rails.application.routes.draw do
   delete "carts/delete_from_cart/:camp_id/:student_id" => "carts#delete_from_cart", as: :delete_from_cart
   post "carts/checkout", to: "carts#checkout", as: :checkout
   
+  # error routes
+  match "/404", :to => "errors#not_found", :via => :all
+  match "/500", :to => "errors#internal_server_error", :via => :all
 
 end

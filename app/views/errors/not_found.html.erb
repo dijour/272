@@ -1,0 +1,21 @@
+<!-- Taken from Prof. H's Arbeit example, but changed the text a bit -->
+<div class="row">
+	<div class="small-4 columns">
+		<%= image_tag 'battlestar-galactica-logo-vector.png', class: 'left' %>
+	</div>
+	<div class="small-8 columns">
+		<h3>404 Error - Security Alert</h3>
+
+    <p>Apparently you are trying to access a page which does not exist in our system.  
+       This might be a result of direct URL manipulation, which 
+       <%= link_to "Admiral Amada", "http://en.battlestarwiki.org/wiki/William_Adama" %> 
+       views as a potential security threat.  Are you a <%= link_to "Cylon", "http://en.battlestarwiki.org/wiki/Cylons_(RDM)" %>? 
+       If so, please escort yourself out the airlock.  If you are not a Cylon, be aware that we view your actions as 
+       inappropriate and the Marines will throw you in the <%= link_to "brig", "http://en.battlestarwiki.org/wiki/Brig" %> 
+       if you persist in doing this.</p>
+    <p>So say we all.</p>
+      
+    <p>Note: This page was taken (and modified slightly) from Prof. H's 
+       <%= link_to "Arbeit example", "https://github.com/profh/Arbeit_67272" %> on GitHub.</p>
+	</div>
+</div>

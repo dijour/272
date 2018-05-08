@@ -18,5 +18,7 @@ module ChessCamp2018
 
     # Set time_zone to Eastern Time
     config.time_zone = 'Eastern Time (US & Canada)'
+    
+    config.exceptions_app = self.routes
   end
 end

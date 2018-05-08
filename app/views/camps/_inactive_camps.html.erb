@@ -13,7 +13,6 @@
                 <tr>
                   <th>Start Date</th>
                   <th>Time Slot</th>
-                  <th>Max Capacity</th>
                   <th>Remaining Slots</th>
                   <td>
                     <% if can? :update, Camp %>
@@ -27,7 +26,6 @@
                 <tr>
                   <td><%= camp.start_date.strftime("%m/%d/%y") %></td>
                   <td><%= camp.time_slot == "am" ? "Morning" : "Afternoon" %></td>
-                  <td><%= camp.max_students %></td>
                   <td><%= camp.max_students - camp.registrations.count %></td>
                   <td>
                     <% if can? :update, Camp %>
