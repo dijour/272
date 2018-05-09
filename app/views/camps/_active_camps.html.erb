@@ -3,7 +3,7 @@
 <% else %>
   <h3 align="left">Active Camps</h3>
 
-    <% @active_camps.active.each do |camp| %>
+    <% @active_camps.active.chronological.each do |camp| %>
     <div class="col s6">
       <div class="card" style="background-color: #6513df">
         <div class="card-content white-text">
