@@ -24,4 +24,8 @@ Key system functionalities:
 12. Mobile nav bar with hamburger button, collapses when screen is shrunk.
 13. Full icon set for almost all show pages to indicate what the data displayed pertains to.
 
+![](images/1.png)
+![](images/2.png)
+![](images/3.png)
+
 This was a fun project - it was stressful, but an excellent experience!
