@@ -21,7 +21,7 @@
   <% end %>
   
   
-  <% if current_user.role == "instructor" && (model_name == "instructor") %>
+  <% if !current_user.nil? && current_user.role == "instructor" && (model_name == "instructor") %>
       <%= link_to(eval("edit_#{model_name}_photo_path(object)"), class: 'waves-effect waves-light btn') do %>
           &nbsp;<%= "Edit Photo" %>
       <% end %>
