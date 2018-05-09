@@ -1,0 +1,15 @@
+<%= simple_form_for(@instructor) do |f| %>
+  <%= f.error_notification %>
+  <div class="row">
+    <div class="form-inputs">
+        <div class="field">
+          <%= f.input :photo, as: :file  %>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-actions col s8">
+      <%= f.button :submit %>
+    </div>
+  </div>
+<% end %>

@@ -1,18 +1,21 @@
 <h3><%= @family.family_name %></h3>
 <h5>Basic Information</h5>
-<p><strong>Parent First Name: </strong><%= @family.parent_first_name %></p>
+<p><i class="material-icons vertical-align-middle padding-bottom-3">person</i><strong>Parent First Name: </strong><%= @family.parent_first_name %></p>
 <p>
+
+  <i class="material-icons vertical-align-middle padding-bottom-3">phone</i>
   <strong>Parent Phone:</strong>
   <% if ! current_user.nil? and (current_user.role == "admin" || current_user.role == "parent") %>
-    <%= best_in_place @family, :phone, as: :input %>
+    <%= best_in_place @family.user, :phone, as: :input %>
   <% else %>
     <%= @family.phone %>
   <% end %>
 </p>
 <p>
+  <i class="material-icons vertical-align-middle padding-bottom-3">email</i>
   <strong>Parent Email:</strong>
   <% if ! current_user.nil? and (current_user.role == "admin" || current_user.role == "parent") %>
-    <%= best_in_place @family, :email, as: :input %>
+    <%= best_in_place @family.user, :email, as: :input %>
   <% else %>
     <%= @family.email %>
   <% end %>

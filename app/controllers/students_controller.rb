@@ -40,10 +40,14 @@ class StudentsController < ApplicationController
   end
 
   def update
-    if @student.update(student_params)
-      redirect_to student_path(@student), notice: "#{@student.first_name} #{@student.last_name} was revised in the system."
-    else
-      render action: 'edit'
+    respond_to do |format|
+      if @student.update_attributes(student_params)
+        format.html { redirect_to(@student, :notice => "Successfully updated #{@student.proper_name}.") }
+        format.json { respond_with_bip(@student) }
+      else
+        format.html { render :action => "edit" }
+        format.json { respond_with_bip(@student) }
+      end
     end
   end
 

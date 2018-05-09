@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_one :family
   has_one :instructor
   
+  # scopes
+  scope :alphabetical, -> { order('username') }
 
   # validations
   validates :username, presence: true, uniqueness: { case_sensitive: false}

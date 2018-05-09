@@ -1,4 +1,4 @@
-<section class="hero is-info welcome is-small" style="background:#6513df">
+<section class="hero is-info welcome is-small" style="z-depth-4; background:#6513df">
     <div class="container-large">
       <h1 class="title center">
         <%= "Hello, #{current_user.username}" %>
@@ -11,6 +11,60 @@
     <%= line_chart Camp.group("date(camps.start_date)").count %>
   </div>
     
+
+<div class="row">
+    
+  <div class="col s12">
+  <div class="card horizontal" style="background-color: #e1484f">
+    <div class="card-stacked">
+      <div class="card-content white-text">
+        <h4 class="center"><%= "Revenue this week: #{weekly_profit}" %></h4>
+      </div>
+      <div class="card-action" style="background-color: white">
+      <% if Camp.active.current.size > 0 %>
+        <table>
+          <thead>
+            <tr>
+              <th >Name</th>
+              <th >Start Date</th>
+              <th >Cost</th>
+              <th >Max Capacity</th>
+              <th >Enrolled Students</th>
+              <th >Instructors</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+        
+          <tbody>
+            <% for camp in Camp.active.alphabetical do %>
+                <% if camp.start_date <= Date.today && camp.end_date >= Date.today %>
+                  <tr>
+                    <td ><%= link_to camp.name, camp, {:style=>'color:blue;'}%></td>
+                    <td ><%= camp.start_date.strftime("%m/%d/%y") %></td>
+                    <td ><%= number_to_currency(camp.cost) %></td>
+                    <td ><%= camp.max_students %></td>
+                    <td ><%= camp.registrations.size %></td>
+                    <td ><%= camp.instructors.size %></td>
+                  </tr>
+                <% end %>  
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <h4 class="center"><%= "No active camps this week." %></h4>
+      <% end %>
+
+      </div>
+    </div>
+  </div>
+  </div>
+    
+
+</div>
+
+
+
+
 
 
 
@@ -41,6 +95,53 @@
       </div>
     </div>
   </div>
+
+</br><h2 class="header center">Performance</h2>
+
+  <div class="col s6">
+    <div class="card" style="background-color: #d13f7c">
+      <div class="card-content white-text">
+        <span class="card-title">Active Camps this Week</span>
+          <%= pie_chart Curriculum.current.group(:name).count, donut: true, messages: {empty: "No data"} %>
+      </div>
+      <div class="card-action">
+        <%= link_to 'Manage Camps', camps_path, :class=>"btn waves-effect waves-light gradient-45deg-red-pink mt-2 btn-small z-depth-2" %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col s6">
+    <div class="card" style="background-color: #e1484f">
+      <div class="card-content white-text">
+        <span class="card-title">Camps per Instructor</span>
+        <%= column_chart Instructor.current.group(:first_name, :last_name).count, donut: true, messages: {empty: "No data"} %>
+      </div>
+      <div class="card-action">
+        <%= link_to 'Manage Instructors', instructors_path, :class=>"btn waves-effect waves-light gradient-45deg-red-pink mt-2 btn-small z-depth-2" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col s12" %>
+    <div class="card" style="background-color: #d13f7c">
+      <div class="card-content white-text">
+        <span class="card-title">Camp Profitability</span>
+      </div>
+      <div class="card-tabs">
+        <ul class="tabs tabs-fixed-width">
+          <li class="tab"><a class="active" href="#test4">Weekly Profit</a></li>
+          <li class="tab"><a href="#test5">Monthly Profit</a></li>
+          <li class="tab"><a href="#test6">Yearly Profit</a></li>
+        </ul>
+      </div>
+      <div class="card-content grey lighten-4">
+        <div id="test4"><%= column_chart @week_money, messages: {empty: "No camp registrations to aggregate."} %></div>
+        <div id="test5"><%= column_chart @month_money, messages: {empty: "No camp registrations to aggregate."} %></div>
+        <div id="test6"><%= column_chart @year_money, messages: {empty: "No camp registrations to aggregate."} %></div>
+      </div>
+    </div>  
+  </div>
+  
 </div>
 
 
@@ -49,22 +150,22 @@
 <div class="row">
     
   <div class="col s12">
-  <div class="card horizontal" style="background-color: #97AFC5">
+  <div class="card horizontal" style="background-color: #e1484f">
     <div class="card-stacked">
       <div class="card-content white-text">
-        <h4 class="center"><%= "Weekly Profit: #{weekly_profit}" %></h4>
+        <h4 class="center"><%= "Revenue this week: #{weekly_profit}" %></h4>
       </div>
-      <div class="card-action">
+      <div class="card-action" style="background-color: white">
       <% if Camp.active.current.size > 0 %>
         <table>
           <thead>
             <tr>
-              <th style="color: white">Name</th>
-              <th style="color: white">Start Date</th>
-              <th style="color: white">Cost</th>
-              <th style="color: white">Max Capacity</th>
-              <th style="color: white">Enrolled Students</th>
-              <th style="color: white">Instructors</th>
+              <th >Name</th>
+              <th >Start Date</th>
+              <th >Cost</th>
+              <th >Max Capacity</th>
+              <th >Enrolled Students</th>
+              <th >Instructors</th>
               <th colspan="3"></th>
             </tr>
           </thead>
@@ -73,12 +174,12 @@
             <% for camp in Camp.active.alphabetical do %>
                 <% if camp.start_date <= Date.today && camp.end_date >= Date.today %>
                   <tr>
-                    <td style="color: white"><%= link_to camp.name, camp, {:style=>'color:blue;'}%></td>
-                    <td style="color: white"><%= camp.start_date.strftime("%m/%d/%y") %></td>
-                    <td style="color: white"><%= number_to_currency(camp.cost) %></td>
-                    <td style="color: white"><%= camp.max_students %></td>
-                    <td style="color: white"><%= camp.registrations.size %></td>
-                    <td style="color: white"><%= camp.instructors.size %></td>
+                    <td ><%= link_to camp.name, camp, {:style=>'color:blue;'}%></td>
+                    <td ><%= camp.start_date.strftime("%m/%d/%y") %></td>
+                    <td ><%= number_to_currency(camp.cost) %></td>
+                    <td ><%= camp.max_students %></td>
+                    <td ><%= camp.registrations.size %></td>
+                    <td ><%= camp.instructors.size %></td>
                   </tr>
                 <% end %>  
             <% end %>

@@ -1,6 +1,7 @@
 <h3> Curriculum Details</h3>
 
 <p>
+  <i class="material-icons vertical-align-middle padding-bottom-3">import_contacts</i>
   <strong>Name:</strong>
   <% if ! current_user.nil? and current_user.role == "admin" %>
     <%= best_in_place @curriculum, :name, as: :input %>
@@ -10,6 +11,7 @@
 </p>
 
 <p>
+  <i class="material-icons vertical-align-middle padding-bottom-3">notes</i>
   <strong>Description:</strong>
   <% if ! current_user.nil? and current_user.role == "admin" %>
     <%= best_in_place @curriculum, :description, as: :textarea %>
@@ -19,6 +21,7 @@
 </p>
 
 <p>
+  <i class="material-icons vertical-align-middle padding-bottom-3">show_chart</i>
   <strong>Ratings:</strong>
   <%= @curriculum.min_rating == 0 ? "Unrated" : @curriculum.min_rating %> - <%= @curriculum.max_rating %>
 </p>

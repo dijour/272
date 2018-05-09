@@ -62,6 +62,11 @@ class InstructorsController < ApplicationController
     @instructor = Instructor.find(params[:id]) 
   end
 
+  def change_photo
+    @instructor = Instructor.find(params[:id]) 
+  end
+  
+
   private
     def set_instructor
       @instructor = Instructor.find(params[:id])

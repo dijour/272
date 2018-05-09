@@ -1,10 +1,25 @@
 <h3><%= @student.proper_name %></h3>
 
 <h5>Student Information</h5>
-<p><strong>First Name: </strong><%= @student.first_name %></p>
-<p><strong>Last Name: </strong><%= @student.last_name %></p>
-<p><strong>Parent Emergency Contact: </strong><%= number_to_phone @student.family.phone %></p>
-<p><strong>Parent Email: </strong><%= @student.family.email %></p>
+<p><i class="material-icons vertical-align-middle padding-bottom-3">person</i><strong>First Name: </strong><%= @student.first_name %></p>
+<p><i class="material-icons vertical-align-middle padding-bottom-3">person</i><strong>Last Name: </strong><%= @student.last_name %></p>
+
+<p>
+  <i class="material-icons vertical-align-middle padding-bottom-3">show_chart</i>
+  <strong>Rating:</strong>
+  <% if ! current_user.nil? and (current_user.role == "admin" || current_user.role == "parent") %>
+    <%= best_in_place @student, :rating, as: :input %>
+  <% else %>
+    <%= @student.rating %>
+  <% end %>
+</p>
+
+
+
+
+
+<p><i class="material-icons vertical-align-middle padding-bottom-3">phone</i><strong>Parent Emergency Contact: </strong><%= number_to_phone @student.family.phone %></p>
+<p><i class="material-icons vertical-align-middle padding-bottom-3">email</i><strong>Parent Email: </strong><%= @student.family.email %></p>
 <p><strong>Active:</strong>
   <%= @student.active ? "Yes" : "No" %>
 </p>

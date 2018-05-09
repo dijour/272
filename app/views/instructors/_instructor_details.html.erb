@@ -6,6 +6,7 @@
 <% end %>
 
 <p>
+  <i class="material-icons vertical-align-middle padding-bottom-3">notes</i>
   <strong>Description:</strong>
   <% if ! current_user.nil? and (current_user.role == "admin" || current_user.role == "instructor") %>
     <%= best_in_place @instructor, :bio, as: :textarea %>
@@ -15,18 +16,20 @@
 </p>
 
 <p>
+  <i class="material-icons vertical-align-middle padding-bottom-3">email</i>
   <strong>Email:</strong>
   <% if ! current_user.nil? and (current_user.role == "admin" || current_user.role == "instructor") %>
-    <%= best_in_place @instructor, :email, as: :input %>
+    <%= best_in_place @instructor.user, :email, as: :input %>
   <% else %>
     <%= @instructor.email %>
   <% end %>
 </p>
 
 <p>
+  <i class="material-icons vertical-align-middle padding-bottom-3">phone</i>
   <strong>Phone:</strong>
   <% if ! current_user.nil? and (current_user.role == "admin" || current_user.role == "instructor") %>
-    <%= best_in_place @instructor, :phone, as: :input, :display_with => :number_to_phone, :helper_options => { :area_code => true } %>
+    <%= best_in_place @instructor.user, :phone, as: :input, :display_with => :number_to_phone, :helper_options => { :area_code => true } %>
   <% else %>
     <%= number_to_phone (@instructor.phone) %>
   <% end %>

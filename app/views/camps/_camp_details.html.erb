@@ -1,19 +1,27 @@
 <div class="card" style="background-color: #d13f7c">
   <div class="card-content white-text">
-  Camp Details
     <span class="card-title"><%=@camp.curriculum.name%></span>
 
     <p><%= @camp.curriculum.description %></p>
 
     <h5>Basic Information</h5>
-    <p><strong>Location: </strong><%= @camp.location.name %></p>
-    <p><strong>Dates: </strong><%= @camp.start_date.strftime("%m/%d/%y") %> - <%= @camp.end_date.strftime("%m/%d/%y") %></p>
-    <p><strong>Time of Day: </strong><%= @camp.time_slot == "am" ? "Morning" : "Afternoon" %></p>
-    <p><strong>Chess Levels: </strong><%= @camp.curriculum.min_rating %> - <%= @camp.curriculum.max_rating %></p>
-    <p><strong>Max Enrollment: </strong><%= @camp.max_students %></p>
-    <p><strong>Active: </strong><%= @camp.active ? "camp is currently active" : "camp is currently inactive." %></p>
-    <p><strong>Camp: </strong>$<%= @camp.cost %>0</p>
-    <p><strong>Slots Remaining: </strong><%= @camp.max_students - @camp.registrations.count %></p>
+    <p><i class="material-icons vertical-align-middle padding-bottom-3">location_on</i><strong>Location: </strong><%= @camp.location.name %></p>
+    <p><i class="material-icons vertical-align-middle padding-bottom-3">calendar_today</i><strong>Dates: </strong><%= @camp.start_date.strftime("%m/%d/%y") %> - <%= @camp.end_date.strftime("%m/%d/%y") %></p>
+    <p><i class="material-icons vertical-align-middle padding-bottom-3">access_time</i><strong>Time of Day: </strong><%= @camp.time_slot == "am" ? "Morning" : "Afternoon" %></p>
+    <p><i class="material-icons vertical-align-middle padding-bottom-3">show_chart</i><strong>Chess Levels: </strong><%= @camp.curriculum.min_rating %> - <%= @camp.curriculum.max_rating %></p>
+    <p>
+      <i class="material-icons vertical-align-middle padding-bottom-3">how_to_reg</i>
+      <strong>Max Enrollment:</strong>
+      <% if ! current_user.nil? and (current_user.role == "admin") %>
+        <%= best_in_place @camp, :max_students, as: :input %>
+      <% else %>
+        <%= @camp.max_students %>
+      <% end %>
+    </p>
+    <p><i class="material-icons vertical-align-middle padding-bottom-3">perm_contact_calendar</i><strong>Slots Remaining: </strong><%= @camp.max_students - @camp.registrations.count %></p>
+    <p><i class="material-icons vertical-align-middle padding-bottom-3">attach_money</i><strong>Cost: </strong><%= number_to_currency(@camp.cost) %></p>
+    <p><strong>Active: </strong><%= @camp.active ? "Yes" : "No" %></p>
+    
   </div>
   <div class="card-action">
     <% if can? :update, Camp %>

@@ -33,6 +33,9 @@ Rails.application.routes.draw do
   # routes for managing passwords
   get 'instructors/:id/change_pass' => 'instructors#change_pass', :as => :edit_instructor_password
   get 'families/:id/change_pass' => 'families#change_pass', :as => :edit_family_password
+  
+  # routes for managing instructor photos
+  get 'instructors/:id/change_photo' => 'instructors#change_photo', :as => :edit_instructor_photo
 
   # Routes for managing camp instructors
   get 'camps/:id/instructors', to: 'camps#instructors', as: :camp_instructors

@@ -18,12 +18,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <% if user.role == "instructor" %>
-            <td><%= link_to user.instructor, instructor %></td>
-        <% end %>
-        <% if user.role == "parent" %>
-            <td><%= link_to user.family, family %></td>
-        <% end %>
+        <td><%= user.username%></td>
         <td><%= user.email %></td>
         <td><%= number_to_phone user.phone %></td>
         <% if can? :update, User %>

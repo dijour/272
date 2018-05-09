@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
   
   def index
-    @users = User.all
+    @users = User.all.alphabetical.alphabetical.paginate(:page => params[:users]).per_page(10)
   end
 
   # GET /users/1/edit
@@ -34,19 +34,39 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
+  # def update
+  #   if @user.update_attributes(user_params)
+  #     if @user.role == "instructor"
+  #       redirect_to(@user.instructor, :notice => 'User was successfully updated.')
+  #     end
+  #     if @user.role == "parent"
+  #       redirect_to(@user.family , :notice => "User was successfully updated" )
+  #     end
+  #     if @user.role == "admin"
+  #       redirect_to(home_path , :notice => "User was successfully updated" )
+  #     end
+  #   else
+  #     render :action => "edit"
+  #   end
+  # end
+  
   def update
-    if @user.update_attributes(user_params)
-      if @user.role == "instructor"
-        redirect_to(@user.instructor, :notice => 'User was successfully updated.')
+    respond_to do |format|
+      if @user.update_attributes(user_params)
+        if @user.role == "instructor"
+          format.html { redirect_to(@user.instructor, :notice => "Successfully updated #{@user.username}.") }
+        end
+        if @user.role == "parent"
+          format.html { redirect_to(@user.family, :notice => "Successfully updated #{@user.username}.") }
+        end
+        if @user.role == "admin"
+          format.html { redirect_to(home_path, :notice => "Successfully updated #{@user.username}.") }
+        end
+        format.json { respond_with_bip(@user) }
+      else
+        format.html { render :action => "edit" }
+        format.json { respond_with_bip(@user) }
       end
-      if @user.role == "parent"
-        redirect_to(@user.family , :notice => "User was successfully updated" )
-      end
-      if @user.role == "admin"
-        redirect_to(home_path , :notice => "User was successfully updated" )
-      end
-    else
-      render :action => "edit"
     end
   end
 

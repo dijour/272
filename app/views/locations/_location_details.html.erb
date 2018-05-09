@@ -1,10 +1,12 @@
 <h4><%= @location.name %></h4>
 
-<strong>Address:</strong></br>
+<i class="material-icons vertical-align-middle padding-bottom-3">location_on</i>
+  <strong>Address:</strong></br>
 
-  <%= render partial: "partials/address_info", locals: {location: @location}  %>
+  <%= render partial: "partials/address_info", locals: {location: @location}, :style=>"margin"  %>
 
 <p>
+  <i class="material-icons vertical-align-middle padding-bottom-3">how_to_reg</i>
   <strong>Maximum Capacity:</strong>
   
   <% if ! current_user.nil? and current_user.role == "admin" %>
