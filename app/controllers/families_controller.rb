@@ -1,5 +1,8 @@
 class FamiliesController < ApplicationController
+  include AppHelpers::Cart
+
   authorize_resource  
+
 
 # ActiveModel::UnknownAttributeError in FamiliesController#create
 # unknown attribute 'email' for Family.
@@ -40,6 +43,7 @@ class FamiliesController < ApplicationController
         user = User.find_by_email(@user.email)
         if user && User.authenticate(@user.email, @user.password)
           session[:user_id] = user.id
+          create_cart
           redirect_to home_path, notice: "Logged in!" 
         else
           render action: 'new'

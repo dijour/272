@@ -4,7 +4,7 @@ class CurriculumsController < ApplicationController
   before_action :set_curriculum, only: [:show, :edit, :update, :destroy]
 
   def index
-    @curriculums = Curriculum.all
+    @curriculums = Curriculum.all.alphabetical
   end
 
   def show
