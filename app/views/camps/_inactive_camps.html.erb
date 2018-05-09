@@ -4,6 +4,7 @@
   <h3 align="left">Inactive Camps</h3>
 
     <% @inactive_camps.each do |camp| %>
+
     <div class="col s6">
       <div class="card" style="background-color: #6513df">
         <div class="card-content white-text">
@@ -40,6 +41,7 @@
     </div>
     <% end %>
 <% end %>
+
 
 <span class="paginate">
   <%= will_paginate @inactive_camps, :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next", :param_name => 'inactive_camps' %>

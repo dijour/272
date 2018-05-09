@@ -1,5 +1,6 @@
 class CartsController < ApplicationController
   include AppHelpers::Cart
+  require 'base64'
   
   skip_before_action :verify_authenticity_token  
 
@@ -10,6 +11,7 @@ class CartsController < ApplicationController
     @cart = session[:cart]
     @total_price = calculate_total_cart_registration_cost
     @ids = get_array_of_ids_for_generating_registrations
+    @payment = set_up_payments
   end
   
   def add_to_cart
@@ -30,10 +32,10 @@ class CartsController < ApplicationController
   end
  
   def checkout
+    @payment = Array.new
     @credit_card_num = params[:number].to_s.gsub(/\s+/, "")
     @exp_year = params[:expiry].chomp(" ").split("/")[1].gsub(/\s+/, "").to_i
     @exp_month = params[:expiry].chomp(" ").split("/")[0].gsub(/\s+/, "").to_i
-    @payment = ""
     cc = CreditCard.new(@credit_card_num, @exp_year, @exp_month)
     if cc.expired? && (!cc.valid?)
       flash[:notice] = "Credit card and expiration date are invalid."
@@ -59,11 +61,25 @@ class CartsController < ApplicationController
         r.expiration_year = @exp_year
         r.expiration_month = @exp_month
         r.pay
+        blah = Base64.decode64(r.payment)
+        a = blah.gsub!(/[\:\;\.]/, '')
+        b = []
+        b << a
+        @payment << b
       end
       clear_cart
       flash[:notice] = "Thank you for your purchase!"
-      redirect_to carts_path()
+      # redirect_to carts_path()
+      redirect_to receipt_path(@payment)
     end
+  end
+  
+  def receipt
+    @payment = params[:payment]
+  end
+    
+  def set_up_payments
+    @payments = []
   end
  
 end
