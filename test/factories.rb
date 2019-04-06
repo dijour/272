@@ -18,8 +18,8 @@ FactoryBot.define do
   
   factory :camp do 
     cost 150
-    start_date Date.new(2018,7,16)
-    end_date Date.new(2018,7,20)
+    start_date Date.new(2019,7,16)
+    end_date Date.new(2019,7,20)
     time_slot "am"
     max_students 8
     active true
